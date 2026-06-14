@@ -1,0 +1,39 @@
+/* Awake OS — Book Cover Palette (exact) */
+
+:root {
+  /* Deep teal/blue gradient endpoints */
+  --color-void-950: #0B1F2E;
+  --color-void-900: #1A3A4D;
+  --color-void-800: #1F4258;
+  --color-void-700: #254B63;
+
+  /* Vibrant turquoise/cyan */
+  --color-cyan: #40F0D8;
+  --color-cyan-soft: #5CE8D5;
+  --color-cyan-bright: #00E5C0;
+  --color-orange: #FF6B35;
+
+  /* Text — bright white / light cyan */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E0F7FF;
+  --color-text-muted: #B8F5FF;
+  --color-text-heading: #E8FFFE;
+
+  /* Surfaces */
+  --color-card: rgba(11, 31, 46, 0.78);
+  --color-border-glow: rgba(64, 240, 216, 0.32);
+  --color-border-subtle: rgba(0, 229, 192, 0.22);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+}

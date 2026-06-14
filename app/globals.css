@@ -1,0 +1,1405 @@
+@import "tailwindcss";
+@import "../src/styles/tokens.css";
+
+/* ============================================
+   AWAKE OS — Exact Book Cover Palette
+   Luminous, calm, hopeful, ethereal.
+   ============================================ */
+
+:root {
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Deep teal/blue gradient */
+  --color-void-950: #0B1F2E;
+  --color-void-900: #1A3A4D;
+  --color-void-800: #1F4258;
+  --color-void-700: #254B63;
+
+  /* Vibrant turquoise/cyan */
+  --color-cyan: #40F0D8;
+  --color-cyan-soft: #5CE8D5;
+  --color-cyan-bright: #00E5C0;
+  --color-orange: #FF6B35;
+  --color-gold: #FF6B35;
+  --color-teal: #00E5C0;
+
+  /* Text — bright white / light cyan */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E0F7FF;
+  --color-text-muted: #B8F5FF;
+  --color-text-heading: #E8FFFE;
+  --color-text-highlight: #40F0D8;
+
+  /* Surfaces & borders */
+  --color-card: rgba(11, 31, 46, 0.78);
+  --color-border-subtle: rgba(0, 229, 192, 0.22);
+  --color-border-glow: rgba(64, 240, 216, 0.32);
+  --color-surface-1: rgba(11, 31, 46, 0.68);
+  --color-surface-2: rgba(0, 229, 192, 0.08);
+
+  /* Shell tokens */
+  --bg-void: #0B1F2E;
+  --bg-void-end: #1A3A4D;
+  --accent-cyan: #40F0D8;
+  --accent-gold: #FF6B35;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0F7FF;
+  --text-muted: #B8F5FF;
+}
+
+/* Base — soft cosmic gradient */
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100%;
+  color: #FFFFFF;
+  background-color: #0B1F2E;
+  background-image:
+    radial-gradient(ellipse 130% 90% at 30% 0%, rgba(0, 229, 192, 0.12), transparent 55%),
+    radial-gradient(ellipse 100% 70% at 80% 100%, rgba(64, 240, 216, 0.08), transparent 50%),
+    linear-gradient(180deg, #0B1F2E 0%, #1A3A4D 100%);
+  background-attachment: fixed;
+}
+
+/* High-quality selection */
+::selection {
+  background-color: rgba(0, 229, 192, 0.4);
+  color: #FFFFFF;
+}
+
+/* Better focus */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+/* Luminous button — vibrant turquoise glow, orange hover */
+.btn-luminous {
+  background: linear-gradient(135deg, #40F0D8 0%, #00E5C0 50%, #5CE8D5 100%);
+  color: #0B1F2E;
+  border: 1px solid rgba(0, 229, 192, 0.7);
+  box-shadow:
+    0 0 16px rgba(64, 240, 216, 0.45),
+    0 0 36px rgba(64, 240, 216, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: background 260ms ease, border-color 260ms ease, box-shadow 320ms ease, color 260ms ease, transform 200ms ease;
+}
+
+.btn-luminous:hover {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 50%, #FF6B35 100%);
+  color: #FFFFFF;
+  border-color: rgba(255, 107, 53, 0.65);
+  box-shadow:
+    0 0 24px rgba(255, 107, 53, 0.62),
+    0 0 52px rgba(255, 107, 53, 0.38),
+    0 4px 20px rgba(255, 107, 53, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-luminous:active {
+  transform: translateY(0) scale(0.985);
+}
+
+/* Premium utility classes */
+.glass {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-glow);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 32px -6px rgba(64, 240, 216, 0.16);
+  transition: border-color 200ms ease, box-shadow 280ms ease, background 220ms ease;
+}
+
+.glass:hover {
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 0 44px -4px rgba(64, 240, 216, 0.28);
+}
+
+/* ============================================
+   LIVING NEURAL FIELD BLEED — systemic continuity
+   These react to the 3D simulation via CSS vars set from JS.
+   Pure teal to match the network (no yellow).
+   ============================================ */
+
+:root {
+  --neural-strength: 0.72;
+  --neural-activity: 0.18;
+  --neural-phase: 0;
+}
+
+/* Base living bleed layer — used in multiple sections - now teal to match the pure teal network, very subtle */
+.neural-bleed {
+  position: absolute;
+  inset: -8% -12%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.28;
+  transition: opacity 400ms ease;
+  background:
+    radial-gradient(ellipse 68% 42% at 48% 22%, rgba(0, 229, 192, 0.1), transparent 68%);
+  mix-blend-mode: screen;
+  filter: blur(1px);
+}
+
+/* Stronger variant — kept minimal, teal */
+.neural-bleed-strong {
+  background:
+    radial-gradient(ellipse 72% 48% at 46% 19%, rgba(64, 240, 216, 0.12), transparent 64%);
+  filter: blur(0.6px);
+}
+
+/* Live filament divider — replaces static border-t with neural pathway */
+.live-filament {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(64,240,216, 0.14), rgba(255,255,255,0.05), rgba(255,107,53, 0.12), transparent);
+  overflow: hidden;
+}
+.live-filament::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, #40F0D8 12%, #00E5C0 50%, #5CE8D5 88%, transparent);
+  opacity: calc(0.12 + var(--neural-activity, 0.18) * 0.6);
+  animation: filament-drift 28s linear infinite;
+}
+.live-filament::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  width: 3px;
+  height: 3px;
+  background: #40F0D8;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(64,240,216,0.65);
+  animation: filament-node 7.2s ease-in-out infinite;
+  transform: translateY(-50%);
+}
+
+@keyframes filament-drift {
+  0% { transform: translateX(-18%); }
+  100% { transform: translateX(82%); }
+}
+@keyframes filament-node {
+  0%, 100% { opacity: 0.35; transform: translateY(-50%) scale(0.6); }
+  50% { opacity: 0.95; transform: translateY(-50%) scale(1.0); }
+}
+
+/* ============================================================
+   V1 EXACT GLASSMORPHISM + BOOK FRAME + IMMERSIVE HERO
+   Ported faithfully for the versão ótima hybrid.
+   Outer shell uses V1 cyan/gold accents and exact .book-frame.
+   Inner neural substrate uses refined teal network.
+   ============================================================ */
+
+/* Cinematic typography — bright with cyan luminance */
+.display {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: -0.058em;
+  color: #E8FFFE;
+  text-shadow:
+    0 0 28px rgba(0, 229, 192, 0.28),
+    0 0 56px rgba(64, 240, 216, 0.14);
+}
+
+.section-title {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: -0.038em;
+  color: #E8FFFE;
+  text-shadow: 0 0 24px rgba(0, 229, 192, 0.22);
+}
+
+h4, h5 {
+  color: #FFFFFF;
+  text-shadow: 0 0 14px rgba(64, 240, 216, 0.12);
+}
+
+.label {
+  letter-spacing: 0.175em;
+}
+
+/* Publisher mark — small, elegant */
+.publisher-logo {
+  display: block;
+  width: fit-content;
+  line-height: 0;
+  filter: drop-shadow(0 0 10px rgba(64, 240, 216, 0.16));
+  transition: opacity 220ms ease, filter 280ms ease;
+}
+
+.publisher-logo:hover {
+  opacity: 1;
+  filter: drop-shadow(0 0 14px rgba(64, 240, 216, 0.24));
+}
+
+/* Hero — prominent front cover */
+.hero-cover-glow {
+  border-radius: 1rem;
+}
+
+.hero-cover-glow:hover,
+.book-cover-clickable.hero-cover-glow:hover {
+  box-shadow:
+    0 0 48px rgba(64, 240, 216, 0.55),
+    0 0 96px rgba(0, 229, 192, 0.38),
+    0 0 140px rgba(64, 240, 216, 0.2),
+    0 32px 64px -14px rgba(0, 0, 0, 0.28);
+}
+
+/* Book section — compact living neural frame */
+.book-section-neural {
+  padding: 0.75rem;
+  box-shadow:
+    0 0 24px rgba(64, 240, 216, 0.28),
+    0 0 48px rgba(0, 229, 192, 0.16);
+}
+
+.book-section-neural::before {
+  inset: -16px;
+  filter: blur(20px);
+}
+
+@media (max-width: 639px) {
+  .book-section-neural {
+    padding: 0.5rem;
+    box-shadow:
+      0 0 16px rgba(64, 240, 216, 0.22),
+      0 0 32px rgba(0, 229, 192, 0.12);
+  }
+
+  .book-section-neural::before {
+    inset: -10px;
+    filter: blur(14px);
+  }
+
+  .hero-cover-glow:hover,
+  .book-cover-clickable.hero-cover-glow:hover {
+    box-shadow:
+      0 0 32px rgba(64, 240, 216, 0.4),
+      0 0 64px rgba(0, 229, 192, 0.28),
+      0 20px 48px -14px rgba(0, 0, 0, 0.28);
+  }
+}
+
+/* Book showcase — turquoise glow frames */
+.book-cover-clickable {
+  cursor: pointer;
+  background: rgba(11, 31, 46, 0.45);
+  border: none;
+  text-align: center;
+  transition:
+    transform 320ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 380ms ease,
+    border-color 380ms ease;
+}
+
+.book-cover-clickable:hover {
+  transform: scale(1.03);
+  cursor: zoom-in;
+}
+
+.book-cover-clickable:focus-visible {
+  outline: 2px solid #40F0D8;
+  outline-offset: 3px;
+}
+
+.book-cover-glow {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(64, 240, 216, 0.32);
+  box-shadow:
+    0 0 28px rgba(64, 240, 216, 0.32),
+    0 0 56px rgba(0, 229, 192, 0.2),
+    0 0 96px rgba(64, 240, 216, 0.1),
+    0 24px 48px -16px rgba(0, 0, 0, 0.35);
+}
+
+.book-cover-glow:hover,
+.book-cover-clickable.book-cover-glow:hover {
+  border-color: rgba(64, 240, 216, 0.5);
+  box-shadow:
+    0 0 40px rgba(64, 240, 216, 0.48),
+    0 0 80px rgba(0, 229, 192, 0.34),
+    0 0 120px rgba(64, 240, 216, 0.18),
+    0 28px 56px -14px rgba(0, 0, 0, 0.3);
+}
+
+.book-cover-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 45%,
+    rgba(0, 229, 192, 0.2) 0%,
+    transparent 70%
+  );
+  filter: blur(24px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.book-spread-glow {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(64, 240, 216, 0.22);
+  box-shadow:
+    0 0 24px rgba(64, 240, 216, 0.18),
+    0 0 48px rgba(0, 229, 192, 0.1),
+    0 16px 40px -14px rgba(0, 0, 0, 0.3);
+}
+
+.book-spread-glow:hover,
+.book-cover-clickable.book-spread-glow:hover {
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow:
+    0 0 36px rgba(64, 240, 216, 0.32),
+    0 0 72px rgba(0, 229, 192, 0.22),
+    0 0 100px rgba(64, 240, 216, 0.12),
+    0 20px 48px -12px rgba(0, 0, 0, 0.26);
+}
+
+/* Author portrait — compact with turquoise aura */
+.author-portrait {
+  border: 1px solid rgba(64, 240, 216, 0.32);
+  box-shadow:
+    0 0 20px rgba(64, 240, 216, 0.24),
+    0 0 40px rgba(0, 229, 192, 0.14),
+    inset 0 0 24px rgba(64, 240, 216, 0.06);
+}
+
+.author-portrait::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 85% 80% at 50% 50%,
+    rgba(0, 229, 192, 0.18) 0%,
+    rgba(64, 240, 216, 0.08) 45%,
+    transparent 72%
+  );
+  filter: blur(14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.author-portrait-logo {
+  filter: drop-shadow(0 0 16px rgba(64, 240, 216, 0.32));
+}
+
+.author-portrait-clickable {
+  border: none;
+  background: transparent;
+  text-align: center;
+  transition: transform 280ms ease, box-shadow 320ms ease;
+}
+
+.author-portrait-clickable:hover {
+  transform: scale(1.03);
+}
+
+/* Cover lightbox */
+.cover-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.cover-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(8, 24, 36, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cover-lightbox-panel {
+  position: relative;
+  z-index: 10;
+  width: min(96vw, 1280px);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.75rem 1.5rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(64, 240, 216, 0.35);
+  background: rgba(11, 31, 46, 0.97);
+  box-shadow:
+    0 0 48px rgba(64, 240, 216, 0.32),
+    0 0 96px rgba(0, 229, 192, 0.2),
+    0 24px 64px rgba(0, 0, 0, 0.45);
+  animation: lightbox-in 280ms cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: auto;
+}
+
+.cover-lightbox-title {
+  margin-bottom: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #40F0D8;
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.cover-lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(88vh - 6rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(64, 240, 216, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cover-lightbox-image-logo {
+  max-width: min(420px, 80vw);
+  max-height: min(420px, 70vh);
+  padding: 1rem;
+  background: rgba(8, 24, 36, 0.6);
+}
+
+.cover-lightbox-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(64, 240, 216, 0.35);
+  background: rgba(11, 31, 46, 0.9);
+  color: #E0F7FF;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.cover-lightbox-close:hover {
+  background: rgba(64, 240, 216, 0.12);
+  border-color: rgba(64, 240, 216, 0.5);
+  color: #FFFFFF;
+}
+
+.cover-lightbox-hint {
+  margin-top: 0.85rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B8F5FF;
+}
+
+/* Join Beta modal */
+.beta-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.beta-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(8, 24, 36, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.beta-modal-panel {
+  position: relative;
+  z-index: 10;
+  width: min(92vw, 440px);
+  padding: 2.25rem 2rem 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(64, 240, 216, 0.38);
+  background: rgba(11, 31, 46, 0.98);
+  box-shadow:
+    0 0 48px rgba(64, 240, 216, 0.28),
+    0 0 96px rgba(0, 229, 192, 0.14),
+    0 24px 64px rgba(0, 0, 0, 0.5);
+  animation: lightbox-in 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.beta-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(64, 240, 216, 0.35);
+  background: rgba(11, 31, 46, 0.9);
+  color: #E0F7FF;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.beta-modal-close:hover {
+  background: rgba(64, 240, 216, 0.12);
+  border-color: rgba(64, 240, 216, 0.5);
+  color: #FFFFFF;
+}
+
+.beta-modal-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.beta-modal-subtitle {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #B8F5FF;
+  text-align: center;
+}
+
+.beta-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.beta-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.beta-modal-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #40F0D8;
+}
+
+.beta-modal-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(64, 240, 216, 0.28);
+  background: rgba(8, 24, 36, 0.75);
+  color: #E0F7FF;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.beta-modal-input::placeholder {
+  color: rgba(184, 245, 255, 0.45);
+}
+
+.beta-modal-input:focus {
+  border-color: rgba(64, 240, 216, 0.55);
+  box-shadow: 0 0 0 3px rgba(64, 240, 216, 0.12), 0 0 20px rgba(64, 240, 216, 0.15);
+  background: rgba(8, 24, 36, 0.9);
+}
+
+.beta-modal-submit {
+  margin-top: 0.35rem;
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.beta-modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 0.25rem;
+}
+
+.beta-modal-success-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(64, 240, 216, 0.12);
+  border: 1px solid rgba(64, 240, 216, 0.45);
+  color: #40F0D8;
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: 0 0 24px rgba(64, 240, 216, 0.25);
+}
+
+.beta-modal-success-text {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #B8F5FF;
+  max-width: 32ch;
+}
+
+.beta-modal-access-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+  padding: 0.7rem 1.35rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #40F0D8 0%, #00E5C0 100%);
+  color: #0B1F2E;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(0, 229, 192, 0.6);
+  box-shadow: 0 0 20px rgba(64, 240, 216, 0.35);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.beta-modal-access-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(64, 240, 216, 0.5);
+}
+
+.beta-modal-link-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #40F0D8;
+}
+
+.beta-modal-link-url {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: #40F0D8;
+  word-break: break-all;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 200ms ease;
+}
+
+.beta-modal-link-url:hover {
+  color: #FFFFFF;
+}
+
+/* Hero author credit — premium, cover-matched orange */
+.hero-author-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  color: #FF6B35;
+  text-shadow:
+    0 0 18px rgba(255, 107, 53, 0.65),
+    0 0 36px rgba(255, 107, 53, 0.32);
+}
+
+/* Glassmorphism — warm luminous glass */
+.glass {
+  background: rgba(11, 31, 46, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(64, 240, 216, 0.3);
+  box-shadow: 0 0 44px -4px rgba(0, 229, 192, 0.18);
+  transition: border-color 200ms ease, box-shadow 280ms ease, background 220ms ease;
+}
+
+.glass:hover {
+  border-color: rgba(255, 107, 53, 0.35);
+  box-shadow: 0 0 48px -4px rgba(64, 240, 216, 0.28), 0 0 24px -8px rgba(255, 107, 53, 0.15);
+}
+
+.glass-strong {
+  background: rgba(11, 31, 46, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(64, 240, 216, 0.3);
+  box-shadow: 0 0 56px -6px rgba(64, 240, 216, 0.24);
+}
+
+.glass-strong:hover {
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 0 60px -6px rgba(64, 240, 216, 0.3);
+}
+
+.glass-subtle {
+  background: rgba(11, 31, 46, 0.58);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(64, 240, 216, 0.15);
+}
+
+/* V1 Immersive Hero Background Layers */
+.space-background {
+  background: 
+    /* Ethereal turquoise bloom — upper */
+    radial-gradient(
+      ellipse 150% 110% at 20% 10%,
+      rgba(64, 240, 216, 0.32) 0%,
+      rgba(64, 240, 216, 0.1) 35%,
+      transparent 65%
+    ),
+    /* Quiet center energy */
+    radial-gradient(
+      ellipse 100% 80% at 50% 55%,
+      rgba(64, 240, 216, 0.1) 0%,
+      transparent 68%
+    ),
+    /* Warm orange whisper — lower right */
+    radial-gradient(
+      ellipse 120% 90% at 90% 85%,
+      rgba(255, 107, 53, 0.14) 0%,
+      transparent 58%
+    ),
+    /* Book cover gradient base */
+    linear-gradient(180deg, #0B1F2E 0%, #1A3A4D 100%);
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 192, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 240, 216, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0, 229, 192, 0.03) 0.5px, transparent 0.5px);
+  background-size: 48px 48px, 48px 48px, 16px 16px;
+  opacity: 0.5;
+}
+
+.terminal-scanlines {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(64, 240, 216, 0.006) 0.6px,
+    transparent 1.2px
+  );
+  background-size: 100% 3px;
+  pointer-events: none;
+  opacity: 0.18;
+}
+
+/* Book frame — soft, elegant turquoise aura */
+.book-frame {
+  background: rgba(11, 31, 46, 0.82);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(64, 240, 216, 0.42);
+  box-shadow: 
+    0 20px 56px -14px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(0, 229, 192, 0.32),
+    0 0 32px rgba(64, 240, 216, 0.38),
+    0 0 64px rgba(0, 229, 192, 0.28),
+    0 0 96px rgba(64, 240, 216, 0.18),
+    0 0 140px rgba(0, 229, 192, 0.1);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.book-frame:hover {
+  border-color: rgba(64, 240, 216, 0.55);
+  box-shadow: 
+    0 24px 64px -12px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(64, 240, 216, 0.42),
+    0 0 44px rgba(64, 240, 216, 0.48),
+    0 0 88px rgba(0, 229, 192, 0.34),
+    0 0 128px rgba(64, 240, 216, 0.22),
+    0 0 72px rgba(255, 107, 53, 0.08);
+}
+
+.book-frame.neural-frame {
+  overflow: visible;
+  position: relative;
+}
+
+/* Ethereal outer glow halo */
+.book-frame.neural-frame::before {
+  content: '';
+  position: absolute;
+  inset: -32px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 90% 80% at 50% 48%,
+    rgba(64, 240, 216, 0.28) 0%,
+    rgba(0, 229, 192, 0.14) 40%,
+    rgba(64, 240, 216, 0.06) 58%,
+    transparent 74%
+  );
+  filter: blur(32px);
+  z-index: -1;
+  pointer-events: none;
+  animation: frame-breathe 6s ease-in-out infinite;
+}
+
+.book-frame.neural-frame::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgba(64, 240, 216, 0.2);
+  box-shadow: inset 0 0 24px rgba(64, 240, 216, 0.12);
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes frame-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Inner neural substrate container (exact match to the refined hybrid frame treatment) */
+.neural-substrate {
+  background: #081824;
+  border: 1px solid rgba(0, 229, 192, 0.12);
+}
+
+/* Exact V1 inner vignette for the neural frame (preserves glass tactility) */
+.neural-vignette {
+  background: radial-gradient(circle at 50% 42%, transparent 62%, rgba(11,31,46,0.1) 90%);
+  box-shadow: inset 0 0 24px rgba(64, 240, 216, 0.06);
+}
+
+/* V1 Neural hints (glass badges) */
+.neural-hint {
+  background: rgba(11, 31, 46, 0.88);
+  border: 1px solid rgba(64, 240, 216, 0.28);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px rgba(0, 229, 192, 0.16);
+  font-feature-settings: "tnum" 1;
+}
+
+/* Compact single-line interaction hint inside book frame */
+.neural-hint-compact {
+  width: max-content;
+  max-width: calc(100% - 1rem);
+  white-space: nowrap;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  color: #B8F5FF;
+  line-height: 1;
+  z-index: 5;
+}
+
+@media (min-width: 768px) {
+  .neural-hint-compact {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    padding: 0.35rem 0.75rem;
+  }
+}
+
+/* V1 Glass Cards & Modules */
+.module-card {
+  transition: all 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.module-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.25), 0 0 48px -4px rgba(64, 240, 216, 0.28);
+}
+
+.arch-panel {
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.arch-panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(64, 240, 216, 0.35);
+  box-shadow: 0 0 56px -6px rgba(64, 240, 216, 0.26);
+}
+
+/* Accent lines for panels (V1 exact) */
+.accent-cyan { border-top: 2.5px solid var(--accent-cyan); }
+.accent-gold { border-top: 2.5px solid var(--accent-gold); }
+
+/* Navbar links (V1) */
+.nav-link {
+  position: relative;
+  transition: color 150ms ease;
+}
+.nav-link:hover {
+  color: #40F0D8;
+  text-shadow: 0 0 24px rgba(64, 240, 216, 0.4);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent-cyan), var(--accent-gold));
+  transition: width 200ms ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Final CTA block (V1) */
+.final-cta {
+  background: linear-gradient(145deg, rgba(0,229,192,0.1) 0%, rgba(11,31,46,0.7) 100%);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(64, 240, 216, 0.3);
+  box-shadow: 0 0 72px rgba(64, 240, 216, 0.22);
+}
+
+/* Site footer */
+.site-footer {
+  background: linear-gradient(180deg, rgba(11, 31, 46, 0.35) 0%, rgba(8, 24, 36, 0.85) 100%);
+}
+
+.site-footer-copy {
+  letter-spacing: 0.02em;
+}
+
+.site-footer-link {
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(64, 240, 216, 0.35);
+}
+
+.site-footer-link:hover {
+  text-decoration-color: rgba(64, 240, 216, 0.7);
+}
+
+/* Privacy & Legal page */
+.privacy-page {
+  background: transparent;
+}
+
+.privacy-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.privacy-back-link {
+  color: #40F0D8;
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+
+.privacy-back-link:hover {
+  color: #E0F7FF;
+}
+
+.privacy-panel {
+  box-shadow:
+    0 0 40px rgba(64, 240, 216, 0.12),
+    0 16px 48px -12px rgba(0, 0, 0, 0.35);
+}
+
+.privacy-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(64, 240, 216, 0.45),
+    rgba(0, 229, 192, 0.25),
+    transparent
+  );
+}
+
+.privacy-content p {
+  max-width: 68ch;
+}
+
+.privacy-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.privacy-home-link {
+  color: #40F0D8;
+  transition: color 200ms ease, gap 200ms ease;
+}
+
+.privacy-home-link:hover {
+  color: #FFFFFF;
+}
+
+.privacy-updated {
+  letter-spacing: 0.02em;
+}
+
+.privacy-toc-list a {
+  color: #B8F5FF;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.privacy-toc-list a:hover {
+  color: #40F0D8;
+}
+
+.privacy-section {
+  scroll-margin-top: 6rem;
+}
+
+.privacy-section + .privacy-section {
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(0, 229, 192, 0.12);
+  padding-top: 2rem;
+}
+
+.privacy-section-title {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #E8FFFE;
+  text-shadow: 0 0 16px rgba(0, 229, 192, 0.15);
+}
+
+.privacy-section-body p,
+.privacy-section-body li {
+  max-width: 68ch;
+}
+
+.privacy-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.privacy-list li::marker {
+  color: #40F0D8;
+}
+
+.privacy-inline-link {
+  color: #40F0D8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(64, 240, 216, 0.35);
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+.privacy-inline-link:hover {
+  color: #FFFFFF;
+  text-decoration-color: rgba(64, 240, 216, 0.7);
+}
+
+.privacy-contact-card {
+  margin-top: 0.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(64, 240, 216, 0.22);
+  background: rgba(8, 24, 36, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Zero gravity float (kept for any legacy book treatment, disabled on reduced motion) */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.float {
+  animation: float-subtle 7.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+@media (max-width: 768px) {
+  .float { animation-duration: 8.5s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float, .glass, .book-frame {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Subtle inner book etch for the living codex (scoped inside the neural frame only) */
+.book-etch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 1rem;
+  background: 
+    linear-gradient(to right, rgba(64,240,216,0.04) 0%, transparent 8%, transparent 92%, rgba(255,107,53,0.03) 100%),
+    repeating-linear-gradient(120deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* Subtle live node indicators for protocol / architect rows */
+.neural-node {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #40F0D8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(64,240,216,0.65);
+  animation: neural-pulse 4.8s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.neural-node:nth-child(2) { animation-delay: 0.6s; }
+.neural-node:nth-child(3) { animation-delay: 1.35s; }
+.neural-node:nth-child(4) { animation-delay: 2.1s; }
+
+@keyframes neural-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.7); }
+  45% { opacity: 1.0; transform: scale(1.05); }
+  55% { opacity: 0.9; transform: scale(0.95); }
+}
+
+/* ============================================
+   EXACT V1 STATIC GLASSMORPHISM HYBRID
+   Glass book-frame in hero — neural V2 inserted as inner book art/substrate ONLY.
+   All outer V1 copy, labels, titles, CTAs, section layouts untouched.
+   "Opening the book" = the frame itself + the living neural pages within.
+   ============================================ */
+
+/* HERO — exact V1 layout: tall contemplative viewport, stacked text then the sacred glass book centered */
+.awake-hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 2.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Text block above the frame — exact V1 copy and spacing */
+.awake-hero-content {
+  text-align: center;
+  max-width: 980px;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 1.1rem;
+}
+
+.awake-hero-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.1rem;
+}
+
+.awake-hero-title {
+  font-size: clamp(3.1rem, 7.8vw, 5.35rem);
+  font-weight: 600;
+  letter-spacing: -3.6px;
+  line-height: 0.9;
+  margin-bottom: 0.85rem;
+}
+
+.awake-hero-subtitle {
+  font-size: 1.45rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: rgba(255,255,255,0.75);
+  max-width: 420px;
+  margin: 0 auto 2.1rem;
+  line-height: 1.35;
+}
+
+.awake-hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
+}
+
+/* THE GLASS BOOK-FRAME — exact V1, "logo de cara, na abertura do site, no meio da tela" */
+.awake-glass-frame-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 368px;
+  margin: 0 auto;
+  z-index: 2;
+  /* Slight lift so the book feels like the sacred object at center */
+}
+
+.awake-glass-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 3.82;
+  border-radius: 26px;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.052) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(255,255,255,0.115);
+  box-shadow: 
+    0 28px 68px -18px rgba(0,0,0,0.68),
+    0 10px 28px -10px rgba(0,0,0,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.115),
+    inset 0 -1px 0 rgba(0,0,0,0.16);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+  overflow: hidden;
+  /* Living rim: the frame subtly breathes with the neural substrate inside — escape/imprint */
+  transition: box-shadow 420ms ease;
+}
+
+/* Inner bevel — keeps the physical glass book tactility of V1 */
+.awake-glass-frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.065);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* The living neural substrate container — replaces .static-book exactly. Full V2 neural lives here as the literal pages/folios */
+.awake-neural-book-substrate {
+  position: absolute;
+  inset: 9px;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #050505;
+  z-index: 1;
+  /* Subtle paper-like base so neural filaments read as ink on vellum */
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.65);
+}
+
+/* Etched physical book details layered atop the living neural — spine hint, depth, paper grain — V1 sacred object preserved */
+.awake-book-etch {
+  position: absolute;
+  inset: 9px;
+  border-radius: 13px;
+  pointer-events: none;
+  z-index: 4;
+  box-shadow: 
+    inset 13px 0 0 -5px rgba(255,107,53,0.045), /* left spine warm hint */
+    inset 0 0 92px rgba(0,0,0,0.62);
+  background: 
+    linear-gradient(90deg, rgba(64,240,216,0.015) 0%, transparent 16%), /* faint living light leak from inside neural */
+    repeating-linear-gradient(
+      112deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 3px
+    ); /* micro paper texture over the neural "pages" */
+}
+
+/* Hero instruction hint — exact V1 voice, adapted for contained interactions */
+.awake-hero-instruction {
+  position: absolute;
+  bottom: 1.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9.5px;
+  letter-spacing: 3.2px;
+  color: rgba(255,255,255,0.32);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* Focus state for the sacred interactive book — accessibility + ritual emphasis */
+.awake-neural-book-substrate:focus-within {
+  outline: 1.5px solid rgba(64,240,216,0.45);
+  outline-offset: 3px;
+}
+
+/* First-load "closed book" ritual state — the neural substrate feels dormant, pages pressed together.
+   Removed on first interaction. Pure enhancement layered inside frame. */
+.awake-neural-book-substrate.book-closed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  background: linear-gradient(
+    165deg,
+    rgba(10,10,10,0.42) 0%,
+    rgba(5,5,5,0.18) 32%,
+    rgba(5,5,5,0.08) 58%,
+    rgba(10,10,10,0.32) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 680ms cubic-bezier(0.23, 1.0, 0.32, 1);
+  opacity: 0.94;
+}
+.awake-neural-book-substrate.book-closed {
+  /* Slowed inner life while "closed" — the living field still breathes but restrained */
+  filter: saturate(0.7) brightness(0.82);
+  transition: filter 820ms ease;
+}
+
+/* Responsive tightening of the book for smaller viewports while keeping "meio da tela" presence */
+@media (max-width: 640px) {
+  .awake-glass-frame-wrapper { max-width: 298px; }
+  .awake-hero { padding-bottom: 2.1rem; }
+  .awake-hero-subtitle { font-size: 1.28rem; margin-bottom: 1.65rem; }
+}
+
+/* ============================================
+   RITUAL IMPRINT & ESCAPE — subtle bleed from frame into unchanged V1 sections
+   These enhance existing elements only. No copy or outer layout altered.
+   ============================================ */
+
+/* Substrate bleed continuation into premise / architecture (exact visual language from hybrid) */
+.substrate-bleed {
+  position: absolute;
+  inset: -18% -22%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: calc(0.08 + var(--neural-activity, 0.18) * 0.06);
+  background: 
+    radial-gradient(ellipse 62% 36% at 48% 18%, rgba(64,240,216,0.1), transparent 70%),
+    radial-gradient(ellipse 38% 52% at 52% 78%, rgba(255,107,53,0.06), transparent 75%);
+  mix-blend-mode: screen;
+  transition: opacity 600ms ease;
+}
+
+/* Faint filament echo under premise text — the pages themselves are the neural substrate */
+.premise-substrate {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -38%;
+  height: 175%;
+  background: linear-gradient(transparent, rgba(64,240,216, calc(0.018 * var(--neural-strength,0.72))), transparent);
+  opacity: 0.46;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(0.7px);
+}
+
+/* When protocol rows feel the "imprint" from the open book — gold/teal pulse leak */
+.protocol-imprinted {
+  border-color: rgba(255, 107, 53, 0.22);
+  transition: border-color 280ms ease;
+}
+.protocol-imprinted .neural-node {
+  box-shadow: 0 0 7px rgba(255,107,53,0.55), 0 0 2px rgba(64,240,216,0.45);
+  animation-duration: 1.45s;
+}

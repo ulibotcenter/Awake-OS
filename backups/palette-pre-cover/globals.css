@@ -1,0 +1,726 @@
+@import "tailwindcss";
+@import "../src/styles/tokens.css";
+
+/* ============================================
+   AWAKE OS — Book Cover Design Foundation
+   Calm, ethereal, premium, hopeful.
+   ============================================ */
+
+:root {
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Cosmic foundation — soft gradient endpoints */
+  --color-void-950: #0F172A;
+  --color-void-900: #1E2937;
+  --color-void-800: #243044;
+  --color-void-700: #2D3A4F;
+
+  /* Accents */
+  --color-cyan: #40F0D8;
+  --color-cyan-soft: #5CE8D5;
+  --color-orange: #FF6B35;
+  --color-gold: #FF6B35;
+  --color-teal: #5CE8D5;
+
+  /* Text — bright with cyan warmth */
+  --color-text-primary: #F0F9FF;
+  --color-text-secondary: #CFFAFE;
+  --color-text-muted: #A5F3FC;
+  --color-text-heading: #ECFEFF;
+  --color-text-highlight: #40F0D8;
+
+  /* Surfaces & borders */
+  --color-card: rgba(10, 20, 40, 0.72);
+  --color-border-subtle: rgba(64, 240, 216, 0.18);
+  --color-border-glow: rgba(64, 240, 216, 0.25);
+  --color-surface-1: rgba(10, 20, 40, 0.65);
+  --color-surface-2: rgba(64, 240, 216, 0.08);
+
+  /* Shell tokens */
+  --bg-void: #0F172A;
+  --bg-void-end: #1E2937;
+  --accent-cyan: #40F0D8;
+  --accent-gold: #FF6B35;
+  --text-primary: #F0F9FF;
+  --text-secondary: #CFFAFE;
+  --text-muted: #A5F3FC;
+}
+
+/* Base — soft cosmic gradient */
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100%;
+  color: #F0F9FF;
+  background-color: #0F172A;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(64, 240, 216, 0.08), transparent 55%),
+    linear-gradient(180deg, #0F172A 0%, #1E2937 100%);
+  background-attachment: fixed;
+}
+
+/* High-quality selection */
+::selection {
+  background-color: rgba(64, 240, 216, 0.45);
+  color: #E0F2FE;
+}
+
+/* Better focus */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+/* Luminous button — vibrant turquoise glow, orange hover */
+.btn-luminous {
+  background: linear-gradient(135deg, #40F0D8 0%, #5CE8D5 55%, #40F0D8 100%);
+  color: #0F172A;
+  border: 1px solid rgba(64, 240, 216, 0.65);
+  box-shadow:
+    0 0 16px rgba(64, 240, 216, 0.45),
+    0 0 36px rgba(64, 240, 216, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: background 260ms ease, border-color 260ms ease, box-shadow 320ms ease, color 260ms ease, transform 200ms ease;
+}
+
+.btn-luminous:hover {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 55%, #FF6B35 100%);
+  color: #F0F9FF;
+  border-color: rgba(255, 107, 53, 0.6);
+  box-shadow:
+    0 0 20px rgba(255, 107, 53, 0.5),
+    0 0 44px rgba(255, 107, 53, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Premium utility classes */
+.glass {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-glow);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 32px -6px rgba(64, 240, 216, 0.16);
+  transition: border-color 200ms ease, box-shadow 280ms ease, background 220ms ease;
+}
+
+.glass:hover {
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 0 44px -4px rgba(64, 240, 216, 0.28);
+}
+
+/* ============================================
+   LIVING NEURAL FIELD BLEED — systemic continuity
+   These react to the 3D simulation via CSS vars set from JS.
+   Pure teal to match the network (no yellow).
+   ============================================ */
+
+:root {
+  --neural-strength: 0.72;
+  --neural-activity: 0.18;
+  --neural-phase: 0;
+}
+
+/* Base living bleed layer — used in multiple sections - now teal to match the pure teal network, very subtle */
+.neural-bleed {
+  position: absolute;
+  inset: -8% -12%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.28;
+  transition: opacity 400ms ease;
+  background:
+    radial-gradient(ellipse 68% 42% at 48% 22%, rgba(92, 232, 213, 0.08), transparent 68%);
+  mix-blend-mode: screen;
+  filter: blur(1px);
+}
+
+/* Stronger variant — kept minimal, teal */
+.neural-bleed-strong {
+  background:
+    radial-gradient(ellipse 72% 48% at 46% 19%, rgba(92, 232, 213, 0.1), transparent 64%);
+  filter: blur(0.6px);
+}
+
+/* Live filament divider — replaces static border-t with neural pathway */
+.live-filament {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(64,240,216, 0.14), rgba(255,255,255,0.05), rgba(255,107,53, 0.12), transparent);
+  overflow: hidden;
+}
+.live-filament::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, #40F0D8 12%, #5CE8D5 88%, transparent);
+  opacity: calc(0.12 + var(--neural-activity, 0.18) * 0.6);
+  animation: filament-drift 28s linear infinite;
+}
+.live-filament::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  width: 3px;
+  height: 3px;
+  background: #40F0D8;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(64,240,216,0.65);
+  animation: filament-node 7.2s ease-in-out infinite;
+  transform: translateY(-50%);
+}
+
+@keyframes filament-drift {
+  0% { transform: translateX(-18%); }
+  100% { transform: translateX(82%); }
+}
+@keyframes filament-node {
+  0%, 100% { opacity: 0.35; transform: translateY(-50%) scale(0.6); }
+  50% { opacity: 0.95; transform: translateY(-50%) scale(1.0); }
+}
+
+/* ============================================================
+   V1 EXACT GLASSMORPHISM + BOOK FRAME + IMMERSIVE HERO
+   Ported faithfully for the versão ótima hybrid.
+   Outer shell uses V1 cyan/gold accents and exact .book-frame.
+   Inner neural substrate uses refined teal network.
+   ============================================================ */
+
+/* Cinematic typography — bright with cyan luminance */
+.display {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: -0.058em;
+  color: #ECFEFF;
+  text-shadow:
+    0 0 24px rgba(64, 240, 216, 0.22),
+    0 0 48px rgba(64, 240, 216, 0.1);
+}
+
+.section-title {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: -0.038em;
+  color: #ECFEFF;
+  text-shadow: 0 0 20px rgba(64, 240, 216, 0.18);
+}
+
+h4, h5 {
+  color: #F0F9FF;
+  text-shadow: 0 0 12px rgba(64, 240, 216, 0.1);
+}
+
+.label {
+  letter-spacing: 0.175em;
+}
+
+/* Glassmorphism — warm luminous glass */
+.glass {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(64, 240, 216, 0.28);
+  box-shadow: 0 0 40px -4px rgba(64, 240, 216, 0.2);
+  transition: border-color 200ms ease, box-shadow 280ms ease, background 220ms ease;
+}
+
+.glass:hover {
+  border-color: rgba(255, 107, 53, 0.35);
+  box-shadow: 0 0 48px -4px rgba(64, 240, 216, 0.28), 0 0 24px -8px rgba(255, 107, 53, 0.15);
+}
+
+.glass-strong {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(64, 240, 216, 0.3);
+  box-shadow: 0 0 56px -6px rgba(64, 240, 216, 0.24);
+}
+
+.glass-strong:hover {
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 0 60px -6px rgba(64, 240, 216, 0.3);
+}
+
+.glass-subtle {
+  background: rgba(10, 20, 40, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(64, 240, 216, 0.15);
+}
+
+/* V1 Immersive Hero Background Layers */
+.space-background {
+  background: 
+    /* Ethereal turquoise bloom — upper */
+    radial-gradient(
+      ellipse 150% 110% at 20% 10%,
+      rgba(64, 240, 216, 0.32) 0%,
+      rgba(64, 240, 216, 0.1) 35%,
+      transparent 65%
+    ),
+    /* Quiet center energy */
+    radial-gradient(
+      ellipse 100% 80% at 50% 55%,
+      rgba(64, 240, 216, 0.1) 0%,
+      transparent 68%
+    ),
+    /* Warm orange whisper — lower right */
+    radial-gradient(
+      ellipse 120% 90% at 90% 85%,
+      rgba(255, 107, 53, 0.14) 0%,
+      transparent 58%
+    ),
+    /* Soft gradient base */
+    linear-gradient(180deg, #0F172A 0%, #1E2937 100%);
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(64, 240, 216, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 240, 216, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(64, 240, 216, 0.025) 0.6px, transparent 0.6px);
+  background-size: 52px 52px, 52px 52px, 18px 18px;
+  opacity: 0.55;
+}
+
+.terminal-scanlines {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(64, 240, 216, 0.006) 0.6px,
+    transparent 1.2px
+  );
+  background-size: 100% 3px;
+  pointer-events: none;
+  opacity: 0.18;
+}
+
+/* Book frame — ethereal turquoise aura */
+.book-frame {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(64, 240, 216, 0.35);
+  box-shadow: 
+    0 20px 56px -14px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(64, 240, 216, 0.25),
+    0 0 32px rgba(64, 240, 216, 0.35),
+    0 0 64px rgba(64, 240, 216, 0.22),
+    0 0 100px rgba(64, 240, 216, 0.12);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.book-frame:hover {
+  border-color: rgba(64, 240, 216, 0.5);
+  box-shadow: 
+    0 24px 64px -12px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(64, 240, 216, 0.38),
+    0 0 40px rgba(64, 240, 216, 0.45),
+    0 0 80px rgba(64, 240, 216, 0.3),
+    0 0 120px rgba(64, 240, 216, 0.16),
+    0 0 60px rgba(255, 107, 53, 0.1);
+}
+
+.book-frame.neural-frame {
+  overflow: visible;
+  position: relative;
+}
+
+/* Ethereal outer glow halo */
+.book-frame.neural-frame::before {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 85% 75% at 50% 48%,
+    rgba(64, 240, 216, 0.28) 0%,
+    rgba(64, 240, 216, 0.08) 45%,
+    transparent 72%
+  );
+  filter: blur(28px);
+  z-index: -1;
+  pointer-events: none;
+  animation: frame-breathe 6s ease-in-out infinite;
+}
+
+.book-frame.neural-frame::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgba(64, 240, 216, 0.2);
+  box-shadow: inset 0 0 24px rgba(64, 240, 216, 0.12);
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes frame-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Inner neural substrate container (exact match to the refined hybrid frame treatment) */
+.neural-substrate {
+  background: #05080F;
+  border: 1px solid rgba(64, 240, 216, 0.08);
+}
+
+/* Exact V1 inner vignette for the neural frame (preserves glass tactility) */
+.neural-vignette {
+  background: radial-gradient(circle at 50% 42%, transparent 62%, rgba(15,23,42,0.12) 90%);
+  box-shadow: inset 0 0 24px rgba(64, 240, 216, 0.06);
+}
+
+/* V1 Neural hints (glass badges) */
+.neural-hint {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(92, 232, 213, 0.24);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px -4px rgba(92, 232, 213, 0.15);
+  font-feature-settings: "tnum" 1;
+}
+
+/* V1 Glass Cards & Modules */
+.module-card {
+  transition: all 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.module-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(64, 240, 216, 0.38);
+  box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.25), 0 0 48px -4px rgba(64, 240, 216, 0.28);
+}
+
+.arch-panel {
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.arch-panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(64, 240, 216, 0.35);
+  box-shadow: 0 0 56px -6px rgba(64, 240, 216, 0.26);
+}
+
+/* Accent lines for panels (V1 exact) */
+.accent-cyan { border-top: 2.5px solid var(--accent-cyan); }
+.accent-gold { border-top: 2.5px solid var(--accent-gold); }
+
+/* Navbar links (V1) */
+.nav-link {
+  position: relative;
+  transition: color 150ms ease;
+}
+.nav-link:hover {
+  color: #40F0D8;
+  text-shadow: 0 0 24px rgba(64, 240, 216, 0.4);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent-cyan), var(--accent-gold));
+  transition: width 200ms ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Final CTA block (V1) */
+.final-cta {
+  background: linear-gradient(145deg, rgba(64,240,216,0.12) 0%, rgba(15,23,42,0.65) 100%);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(64, 240, 216, 0.3);
+  box-shadow: 0 0 72px rgba(64, 240, 216, 0.22);
+}
+
+/* Zero gravity float (kept for any legacy book treatment, disabled on reduced motion) */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.float {
+  animation: float-subtle 7.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+@media (max-width: 768px) {
+  .float { animation-duration: 8.5s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float, .glass, .book-frame {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Subtle inner book etch for the living codex (scoped inside the neural frame only) */
+.book-etch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 1rem;
+  background: 
+    linear-gradient(to right, rgba(64,240,216,0.04) 0%, transparent 8%, transparent 92%, rgba(255,107,53,0.03) 100%),
+    repeating-linear-gradient(120deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* Subtle live node indicators for protocol / architect rows */
+.neural-node {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #40F0D8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(64,240,216,0.65);
+  animation: neural-pulse 4.8s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.neural-node:nth-child(2) { animation-delay: 0.6s; }
+.neural-node:nth-child(3) { animation-delay: 1.35s; }
+.neural-node:nth-child(4) { animation-delay: 2.1s; }
+
+@keyframes neural-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.7); }
+  45% { opacity: 1.0; transform: scale(1.05); }
+  55% { opacity: 0.9; transform: scale(0.95); }
+}
+
+/* ============================================
+   EXACT V1 STATIC GLASSMORPHISM HYBRID
+   Glass book-frame in hero — neural V2 inserted as inner book art/substrate ONLY.
+   All outer V1 copy, labels, titles, CTAs, section layouts untouched.
+   "Opening the book" = the frame itself + the living neural pages within.
+   ============================================ */
+
+/* HERO — exact V1 layout: tall contemplative viewport, stacked text then the sacred glass book centered */
+.awake-hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 2.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Text block above the frame — exact V1 copy and spacing */
+.awake-hero-content {
+  text-align: center;
+  max-width: 980px;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 1.1rem;
+}
+
+.awake-hero-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.1rem;
+}
+
+.awake-hero-title {
+  font-size: clamp(3.1rem, 7.8vw, 5.35rem);
+  font-weight: 600;
+  letter-spacing: -3.6px;
+  line-height: 0.9;
+  margin-bottom: 0.85rem;
+}
+
+.awake-hero-subtitle {
+  font-size: 1.45rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: rgba(255,255,255,0.75);
+  max-width: 420px;
+  margin: 0 auto 2.1rem;
+  line-height: 1.35;
+}
+
+.awake-hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
+}
+
+/* THE GLASS BOOK-FRAME — exact V1, "logo de cara, na abertura do site, no meio da tela" */
+.awake-glass-frame-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 368px;
+  margin: 0 auto;
+  z-index: 2;
+  /* Slight lift so the book feels like the sacred object at center */
+}
+
+.awake-glass-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 3.82;
+  border-radius: 26px;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.052) 0%, rgba(255,255,255,0.012) 100%);
+  border: 1px solid rgba(255,255,255,0.115);
+  box-shadow: 
+    0 28px 68px -18px rgba(0,0,0,0.68),
+    0 10px 28px -10px rgba(0,0,0,0.42),
+    inset 0 1px 0 rgba(255,255,255,0.115),
+    inset 0 -1px 0 rgba(0,0,0,0.16);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+  overflow: hidden;
+  /* Living rim: the frame subtly breathes with the neural substrate inside — escape/imprint */
+  transition: box-shadow 420ms ease;
+}
+
+/* Inner bevel — keeps the physical glass book tactility of V1 */
+.awake-glass-frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.065);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* The living neural substrate container — replaces .static-book exactly. Full V2 neural lives here as the literal pages/folios */
+.awake-neural-book-substrate {
+  position: absolute;
+  inset: 9px;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #050505;
+  z-index: 1;
+  /* Subtle paper-like base so neural filaments read as ink on vellum */
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.65);
+}
+
+/* Etched physical book details layered atop the living neural — spine hint, depth, paper grain — V1 sacred object preserved */
+.awake-book-etch {
+  position: absolute;
+  inset: 9px;
+  border-radius: 13px;
+  pointer-events: none;
+  z-index: 4;
+  box-shadow: 
+    inset 13px 0 0 -5px rgba(255,107,53,0.045), /* left spine warm hint */
+    inset 0 0 92px rgba(0,0,0,0.62);
+  background: 
+    linear-gradient(90deg, rgba(64,240,216,0.015) 0%, transparent 16%), /* faint living light leak from inside neural */
+    repeating-linear-gradient(
+      112deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 3px
+    ); /* micro paper texture over the neural "pages" */
+}
+
+/* Hero instruction hint — exact V1 voice, adapted for contained interactions */
+.awake-hero-instruction {
+  position: absolute;
+  bottom: 1.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9.5px;
+  letter-spacing: 3.2px;
+  color: rgba(255,255,255,0.32);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* Focus state for the sacred interactive book — accessibility + ritual emphasis */
+.awake-neural-book-substrate:focus-within {
+  outline: 1.5px solid rgba(64,240,216,0.45);
+  outline-offset: 3px;
+}
+
+/* First-load "closed book" ritual state — the neural substrate feels dormant, pages pressed together.
+   Removed on first interaction. Pure enhancement layered inside frame. */
+.awake-neural-book-substrate.book-closed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  background: linear-gradient(
+    165deg,
+    rgba(10,10,10,0.42) 0%,
+    rgba(5,5,5,0.18) 32%,
+    rgba(5,5,5,0.08) 58%,
+    rgba(10,10,10,0.32) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 680ms cubic-bezier(0.23, 1.0, 0.32, 1);
+  opacity: 0.94;
+}
+.awake-neural-book-substrate.book-closed {
+  /* Slowed inner life while "closed" — the living field still breathes but restrained */
+  filter: saturate(0.7) brightness(0.82);
+  transition: filter 820ms ease;
+}
+
+/* Responsive tightening of the book for smaller viewports while keeping "meio da tela" presence */
+@media (max-width: 640px) {
+  .awake-glass-frame-wrapper { max-width: 298px; }
+  .awake-hero { padding-bottom: 2.1rem; }
+  .awake-hero-subtitle { font-size: 1.28rem; margin-bottom: 1.65rem; }
+}
+
+/* ============================================
+   RITUAL IMPRINT & ESCAPE — subtle bleed from frame into unchanged V1 sections
+   These enhance existing elements only. No copy or outer layout altered.
+   ============================================ */
+
+/* Substrate bleed continuation into premise / architecture (exact visual language from hybrid) */
+.substrate-bleed {
+  position: absolute;
+  inset: -18% -22%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: calc(0.08 + var(--neural-activity, 0.18) * 0.06);
+  background: 
+    radial-gradient(ellipse 62% 36% at 48% 18%, rgba(64,240,216,0.1), transparent 70%),
+    radial-gradient(ellipse 38% 52% at 52% 78%, rgba(255,107,53,0.06), transparent 75%);
+  mix-blend-mode: screen;
+  transition: opacity 600ms ease;
+}
+
+/* Faint filament echo under premise text — the pages themselves are the neural substrate */
+.premise-substrate {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -38%;
+  height: 175%;
+  background: linear-gradient(transparent, rgba(64,240,216, calc(0.018 * var(--neural-strength,0.72))), transparent);
+  opacity: 0.46;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(0.7px);
+}
+
+/* When protocol rows feel the "imprint" from the open book — gold/teal pulse leak */
+.protocol-imprinted {
+  border-color: rgba(255, 107, 53, 0.22);
+  transition: border-color 280ms ease;
+}
+.protocol-imprinted .neural-node {
+  box-shadow: 0 0 7px rgba(255,107,53,0.55), 0 0 2px rgba(64,240,216,0.45);
+  animation-duration: 1.45s;
+}

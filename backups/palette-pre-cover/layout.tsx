@@ -1,0 +1,37 @@
+import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+export const metadata: Metadata = {
+  title: "Awake OS | The Hardware Reset",
+  description: "Mind = OS. Body = Hardware. Awake OS is the operating manual you were never given. Reboot your nervous system in 60 seconds and reclaim clarity, calm, and authentic presence — no endless meditation required.",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} h-full antialiased`}>
+      <body className="min-h-full text-[#F0F9FF]">
+        {children}
+      </body>
+    </html>
+  );
+}
