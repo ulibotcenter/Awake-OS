@@ -1,9 +1,9 @@
 'use client';
-
 import React, { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import JoinBetaModal from '@/components/JoinBetaModal';
 
 const NeuralUniverse = dynamic(
   () => import('@/components/three/NeuralUniverse'),
@@ -26,22 +26,17 @@ interface BookTrace {
   t: number;
 }
 
-const BETA_ACCESS_LINK =
-  'https://booksprout.co/reviewer/review-copy/view/287649/awake-os';
+const BETA_ACCESS_LINK = 'https://booksprout.co/reviewer/review-copy/view/287649/awake-os';
 
 export default function AwakeOS() {
-  // V1 exact navbar offset for smooth scroll
   const NAV_HEIGHT = 80;
 
-  /* Living Codex Ritual State — everything scoped inside the book-frame only */
+  /* Living Codex Ritual State */
   const [bookOpened, setBookOpened] = useState(false);
   const [traces, setTraces] = useState<BookTrace[]>([]);
   const [isReturnVisit, setIsReturnVisit] = useState(false);
   const [coverLightbox, setCoverLightbox] = useState<'front' | 'spread' | 'logo' | null>(null);
   const [betaModalOpen, setBetaModalOpen] = useState(false);
-  const [betaSubmitted, setBetaSubmitted] = useState(false);
-  const [betaName, setBetaName] = useState('');
-  const [betaEmail, setBetaEmail] = useState('');
 
   const lightboxAssets = {
     front: {
@@ -60,14 +55,13 @@ export default function AwakeOS() {
       title: 'Somatic Labs Publishing',
     },
   } as const;
+
   const substrateRef = useRef<HTMLDivElement>(null);
 
-  // Safety: ensure body scroll is never stuck after a crashed lightbox session
   useEffect(() => {
     document.body.style.overflow = '';
   }, []);
 
-  // Initial calming wave on mount so the living codex feels immediately awake (V1 hybrid magic)
   useEffect(() => {
     const t = setTimeout(() => {
       const sim = (window as any).__awakeNeuralSim;
@@ -76,11 +70,9 @@ export default function AwakeOS() {
     return () => clearTimeout(t);
   }, []);
 
-  // Reactive bridge for the living neural (scoped, low cost)
   useEffect(() => {
     let raf = 0;
     let last = 0;
-
     const tick = (now: number) => {
       if (now - last > 160) {
         last = now;
@@ -103,23 +95,19 @@ export default function AwakeOS() {
       }
       raf = requestAnimationFrame(tick);
     };
-
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
     if (!coverLightbox && !betaModalOpen) return;
-
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       if (coverLightbox) setCoverLightbox(null);
       if (betaModalOpen) setBetaModalOpen(false);
     };
-
     document.addEventListener('keydown', onKeyDown);
     document.body.style.overflow = 'hidden';
-
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
@@ -131,7 +119,6 @@ export default function AwakeOS() {
       const opened = localStorage.getItem('awakeOS_bookOpened') === 'true';
       const savedTraces = localStorage.getItem('awakeOS_bookTraces');
       const visitCount = parseInt(localStorage.getItem('awakeOS_visitCount') || '0', 10);
-
       setBookOpened(opened);
       if (savedTraces) setTraces(JSON.parse(savedTraces));
       if (visitCount > 1 || opened) setIsReturnVisit(true);
@@ -149,24 +136,20 @@ export default function AwakeOS() {
   const handleBookRitualInteraction = (e: React.MouseEvent | React.TouchEvent) => {
     const container = substrateRef.current;
     if (!container) return;
-
     const rect = container.getBoundingClientRect();
     const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
-
     const x = ((clientX - rect.left) / rect.width) * 100;
     const y = ((clientY - rect.top) / rect.height) * 100;
 
     if (!bookOpened) {
       setBookOpened(true);
-
       const sim = (window as any).__awakeNeuralSim;
       if (sim?.triggerCalmingWave) {
         sim.triggerCalmingWave(1.6);
         setTimeout(() => sim.triggerCalmingWave(1.15), 180);
         setTimeout(() => sim.triggerCalmingWave(0.9), 520);
       }
-
       const frame = document.getElementById('neural-book-frame');
       if (frame) {
         frame.style.transition = 'box-shadow 420ms cubic-bezier(0.23,1,0.32,1)';
@@ -195,7 +178,6 @@ export default function AwakeOS() {
     }
   };
 
-  // V1 exact smooth scroll
   const scrollTo = (id: string) => {
     const target = document.getElementById(id);
     if (!target) return;
@@ -205,9 +187,6 @@ export default function AwakeOS() {
   };
 
   const openBetaModal = () => {
-    setBetaSubmitted(false);
-    setBetaName('');
-    setBetaEmail('');
     setBetaModalOpen(true);
   };
 
@@ -215,34 +194,25 @@ export default function AwakeOS() {
     setBetaModalOpen(false);
   };
 
-  const handleBetaSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!betaName.trim() || !betaEmail.trim()) return;
-    setBetaSubmitted(true);
-  };
-
   return (
     <>
-      {/* FIXED GLASS NAVBAR — EXACT V1 */}
+      {/* FIXED GLASS NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center">
             <span className="text-2xl font-semibold tracking-[-0.04em]">Awake OS</span>
           </a>
-
           <div className="hidden md:flex items-center gap-9 text-sm">
             <a onClick={() => scrollTo('the-overload')} className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer">The Premise</a>
             <a onClick={() => scrollTo('the-architecture')} className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer">The Architecture</a>
             <a onClick={() => scrollTo('the-modules')} className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer">The Modules</a>
             <a onClick={() => scrollTo('the-architect')} className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer">The Architect</a>
           </div>
-
           <div className="hidden md:block">
             <button type="button" onClick={openBetaModal} className="btn-luminous px-5 py-2.5 rounded-full text-sm font-medium tracking-[-0.01em] cursor-pointer">
               Join Beta
             </button>
           </div>
-
           <div className="md:hidden">
             <button type="button" onClick={openBetaModal} className="btn-luminous px-4 py-2 rounded-full text-xs font-medium tracking-[-0.01em] cursor-pointer">
               Join Beta
@@ -251,57 +221,48 @@ export default function AwakeOS() {
         </div>
       </nav>
 
-      {/* HERO — copy left · prominent front cover right */}
+      {/* HERO */}
       <header className="relative min-h-[100svh] pt-20 flex items-center">
-        {/* Multi-layer immersive background (V1 exact) */}
         <div className="absolute inset-0 space-background"></div>
         <div className="absolute inset-0 neural-grid"></div>
         <div className="absolute inset-0 terminal-scanlines"></div>
-
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(64,240,216,0.08)] via-transparent to-[rgba(26,58,77,0.18)]"></div>
-
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-8 sm:pt-12 pb-14 sm:pb-20">
           <div className="grid md:grid-cols-12 gap-y-10 gap-x-8 lg:gap-x-12 items-center">
-
-            {/* Left: Text — EXACT V1 copy and layout (slightly narrower to give more room to the neural object) */}
             <div className="md:col-span-5 lg:col-span-5 max-w-[38rem] text-center md:text-left mx-auto md:mx-0 w-full">
               <div className="mb-4 sm:mb-5">
                 <span className="hero-author-label label block">ARIEL URI</span>
               </div>
-
               <h1 className="display text-[2.75rem] sm:text-[3.5rem] md:text-[5.6rem] lg:text-[6.1rem] leading-[0.94] font-semibold tracking-[-0.055em] mb-5 sm:mb-7">
                 Awake OS
               </h1>
-
               <p className="text-xl sm:text-2xl md:text-[1.72rem] leading-tight tracking-[-0.018em] text-[#E0F7FF] max-w-[38ch] mx-auto md:mx-0 mb-6 sm:mb-8">
                 Upgrade your Mind. Reset your Hardware.
               </p>
-
               <p className="text-lg sm:text-xl md:text-[1.35rem] leading-snug tracking-[-0.015em] text-[#E0F7FF] max-w-[40ch] mx-auto md:mx-0 mb-4 sm:mb-5">
                 You weren&apos;t built for this world — but you can{' '}
                 <span className="text-[#40F0D8] font-medium">upgrade</span>.
               </p>
-
               <p className="text-sm sm:text-base md:text-[1.05rem] leading-relaxed tracking-[-0.01em] text-[#B8F5FF] max-w-[42ch] mx-auto md:mx-0 mb-8 sm:mb-10">
                 End the <span className="text-[#40F0D8]">hidden stress loop</span> and reclaim{' '}
                 <span className="text-[#40F0D8]">calm, clarity, and authentic presence</span> — no endless meditation needed.
               </p>
-
               <div className="flex items-center justify-center md:justify-start gap-4 mb-8 sm:mb-10">
                 <div className="h-px w-9 bg-[rgba(64,240,216,0.55)] shadow-[0_0_8px_rgba(64,240,216,0.4)]"></div>
                 <span className="label text-[10px] sm:text-xs text-[#B8F5FF] tracking-[3px]">THE HARDWARE RESET</span>
               </div>
-
-              <button type="button" onClick={openBetaModal} className="btn-luminous w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium tracking-[-0.01em] active:scale-[0.985] cursor-pointer">
+              <button 
+                type="button" 
+                onClick={openBetaModal} 
+                className="btn-luminous w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-medium tracking-[-0.01em] active:scale-[0.985] cursor-pointer"
+              >
                 <span className="sm:hidden">Join Beta</span>
                 <span className="hidden sm:inline">Begin the Upgrade — Join Beta</span>
                 <span className="text-lg opacity-80">→</span>
               </button>
-
               <p className="mt-3 sm:mt-4 text-[10px] sm:text-xs text-[#B8F5FF] tracking-[0.8px]">Limited early access · No spam · Just results</p>
             </div>
 
-            {/* Right: prominent front cover */}
             <div className="md:col-span-7 lg:col-span-7 mt-2 sm:mt-6 md:mt-0 flex justify-center md:justify-end">
               <button
                 type="button"
@@ -321,18 +282,16 @@ export default function AwakeOS() {
                 />
               </button>
             </div>
-
           </div>
         </div>
 
-        {/* Scroll prompt — V1 exact */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 z-20">
           <span className="label text-[10px] tracking-[3px] text-[#B8F5FF]">SCROLL TO BEGIN</span>
           <div className="w-px h-7 bg-gradient-to-b from-[rgba(64,240,216,0.65)] to-transparent shadow-[0_0_6px_rgba(64,240,216,0.3)]"></div>
         </div>
       </header>
 
-      {/* THE BOOK — full jacket + neural field */}
+      {/* THE BOOK */}
       <section id="the-book" className="relative py-14 sm:py-20 md:py-28 border-t border-[rgba(0,229,192,0.28)]">
         <div className="absolute inset-0 bg-[rgba(0,229,192,0.03)] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
@@ -343,8 +302,6 @@ export default function AwakeOS() {
               The complete <span className="text-[#40F0D8]">Awake OS</span> protocol — mind as software, body as hardware — in one luminous field guide.
             </p>
           </div>
-
-          {/* Full Jacket (left, prominent) + Neural Field (right, secondary) */}
           <div className="grid md:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
             <div className="md:col-span-7 lg:col-span-8 flex flex-col order-1">
               <p className="label text-[10px] text-[#40F0D8] tracking-[3px] mb-3 sm:mb-4 text-center md:text-left">FULL JACKET — FRONT &amp; BACK</p>
@@ -366,13 +323,9 @@ export default function AwakeOS() {
               </button>
               <p className="mt-2 sm:mt-3 text-[10px] text-[#B8F5FF]/80 tracking-[1px] text-center md:text-left">Tap to read back-cover text</p>
             </div>
-
             <div className="md:col-span-5 lg:col-span-4 flex flex-col order-2">
               <p className="label text-[10px] text-[#40F0D8] tracking-[3px] mb-3 sm:mb-4 text-center md:text-left">NEURAL FIELD</p>
-              <div
-                id="neural-book-frame"
-                className="book-frame neural-frame book-section-neural relative w-full flex-1 min-h-[220px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] rounded-2xl p-2 sm:p-3"
-              >
+              <div id="neural-book-frame" className="book-frame neural-frame book-section-neural relative w-full flex-1 min-h-[220px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] rounded-2xl p-2 sm:p-3">
                 <div className="relative w-full h-full min-h-[200px] sm:min-h-[260px] rounded-xl overflow-hidden bg-[#081824] border border-[rgba(0,229,192,0.28)]">
                   <div
                     ref={substrateRef}
@@ -384,7 +337,6 @@ export default function AwakeOS() {
                     aria-label="Living neural substrate — drag to rotate, tap to calm"
                   >
                     <NeuralUniverse contained />
-
                     {traces.length > 0 && (
                       <div className="absolute inset-0 pointer-events-none z-[3]">
                         {traces.map((trace, idx) => (
@@ -414,7 +366,7 @@ export default function AwakeOS() {
         </div>
       </section>
 
-      {/* THE OVERLOAD — exact V1 */}
+      {/* THE OVERLOAD */}
       <section id="the-overload" className="relative py-14 sm:py-20 md:py-24 border-t border-[rgba(0,229,192,0.28)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 text-center">
           <h2 className="display text-[2.25rem] sm:text-4xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.05em] leading-none mb-7 sm:mb-9">
@@ -422,23 +374,21 @@ export default function AwakeOS() {
           </h2>
           <div className="max-w-3xl mx-auto">
             <p className="text-2xl md:text-3xl text-[#E0F7FF] tracking-[-0.012em] leading-tight">
-              Modern life is running corrupt scripts in your mind. Endless tabs, decision fatigue, 
+              Modern life is running corrupt scripts in your mind. Endless tabs, decision fatigue,
               and chronic stress are consuming your bandwidth. It's time for a system reboot.
             </p>
           </div>
         </div>
       </section>
 
-      {/* THE ARCHITECTURE — exact V1 */}
+      {/* THE ARCHITECTURE */}
       <section id="the-architecture" className="relative py-16 md:py-20 bg-[rgba(0,229,192,0.05)]">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
           <div className="text-center mb-12 md:mb-16">
             <span className="label text-xs text-[#B8F5FF] tracking-[3.5px]">THE FOUNDATION</span>
             <h3 className="section-title mt-3 text-4xl md:text-5xl font-semibold tracking-[-0.035em]">The Architecture</h3>
           </div>
-
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {/* Mind = OS */}
             <div className="arch-panel glass-strong rounded-3xl p-10 lg:p-12 accent-cyan">
               <div className="flex items-center gap-3 mb-8">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#40F0D8]"></div>
@@ -450,8 +400,6 @@ export default function AwakeOS() {
                 <p>Awake OS teaches you to audit your internal algorithms, reclaim mental bandwidth, and install cleaner protocols for focus and presence.</p>
               </div>
             </div>
-
-            {/* Body = Hardware */}
             <div className="arch-panel glass-strong rounded-3xl p-10 lg:p-12 accent-gold">
               <div className="flex items-center gap-3 mb-8">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#FF6B35]"></div>
@@ -467,7 +415,7 @@ export default function AwakeOS() {
         </div>
       </section>
 
-      {/* THE MODULES — exact V1 */}
+      {/* THE MODULES */}
       <section id="the-modules" className="relative py-20 md:py-24 border-t border-[rgba(0,229,192,0.28)]">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
@@ -479,7 +427,6 @@ export default function AwakeOS() {
               Twelve precise protocols for auditing and rewriting your internal operating system.
             </p>
           </div>
-
           <div className="grid md:grid-cols-3 gap-6">
             <div className="module-card glass rounded-2xl p-8 border border-[rgba(0,229,192,0.28)]">
               <div className="text-[#40F0D8] text-xs tracking-[4px] font-medium mb-5">MODULE 01</div>
@@ -497,12 +444,11 @@ export default function AwakeOS() {
               <p className="text-[#E0F7FF] text-sm leading-relaxed">Identifying which background processes are consuming your attention and how to forcefully end them with precision.</p>
             </div>
           </div>
-
           <p className="text-center text-xs text-[#B8F5FF] tracking-[2px] mt-10">+ 9 MORE PROTOCOLS IN THE COMPLETE SYSTEM</p>
         </div>
       </section>
 
-      {/* THE ARCHITECT — exact V1 */}
+      {/* THE ARCHITECT */}
       <section id="the-architect" className="relative py-20 md:py-24 bg-[rgba(0,229,192,0.05)] border-t border-[rgba(0,229,192,0.28)]">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
           <div className="grid md:grid-cols-12 gap-x-12 items-center">
@@ -525,16 +471,14 @@ export default function AwakeOS() {
                 />
               </button>
             </div>
-
             <div className="md:col-span-8 lg:col-span-9">
               <span className="label text-xs text-[#B8F5FF] tracking-[3.5px]">THE CREATOR</span>
               <h3 className="section-title mt-3 text-4xl md:text-5xl font-semibold tracking-[-0.03em] mb-8">Ariel Uri</h3>
-
               <div className="max-w-[46ch] text-lg text-[#E0F7FF] leading-relaxed tracking-[-0.005em]">
                 Ariel Uri engineered the Awake OS protocol not as a mystic, but as a system architect for the human condition.
               </div>
               <div className="mt-8 text-sm text-[#B8F5FF]">
-                After years studying the intersection of neuroscience, systems thinking, and contemplative practice, 
+                After years studying the intersection of neuroscience, systems thinking, and contemplative practice,
                 he built a practical framework for upgrading the human operating system.
               </div>
             </div>
@@ -542,7 +486,7 @@ export default function AwakeOS() {
         </div>
       </section>
 
-      {/* FINAL CTA — exact V1 */}
+      {/* FINAL CTA */}
       <section id="join-beta" className="relative py-14 sm:py-20 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12">
           <div className="final-cta rounded-2xl sm:rounded-3xl p-8 sm:p-12 md:p-16 text-center border border-[rgba(0,229,192,0.28)]">
@@ -553,17 +497,15 @@ export default function AwakeOS() {
             <p className="mt-4 sm:mt-6 max-w-md mx-auto text-[#E0F7FF] text-base sm:text-lg tracking-[-0.01em]">
               Limited early access to the complete Awake OS protocol is now open.
             </p>
-
             <button type="button" onClick={openBetaModal} className="btn-luminous mt-7 sm:mt-9 w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-sm sm:text-base tracking-[-0.01em] active:scale-[0.985]">
               Join the Beta
             </button>
-
             <div className="mt-8 text-xs text-[#B8F5FF] tracking-[1px]">No spam. No endless meditation. Just results.</div>
           </div>
         </div>
       </section>
 
-      {/* Site footer */}
+      {/* FOOTER */}
       <footer className="site-footer border-t border-[rgba(0,229,192,0.28)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
@@ -580,97 +522,13 @@ export default function AwakeOS() {
         </div>
       </footer>
 
-      {/* Join Beta modal */}
-      {betaModalOpen && (
-        <div
-          className="beta-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="beta-modal-title"
-          onClick={closeBetaModal}
-        >
-          <div className="beta-modal-backdrop" aria-hidden="true" />
-          <div className="beta-modal-panel" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="beta-modal-close"
-              onClick={closeBetaModal}
-              aria-label="Close join beta form"
-            >
-              ×
-            </button>
+      {/* NOVO MODAL - Join Beta com Google Sheets */}
+      <JoinBetaModal 
+        isOpen={betaModalOpen} 
+        onClose={closeBetaModal} 
+      />
 
-            {betaSubmitted ? (
-              <div className="beta-modal-success">
-                <div className="beta-modal-success-icon" aria-hidden="true">✓</div>
-                <h2 id="beta-modal-title" className="beta-modal-title">You&apos;re in!</h2>
-                <p className="beta-modal-success-text">
-                  Welcome to the Awake OS beta. Your access link is ready.
-                </p>
-                <a
-                  href={BETA_ACCESS_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="beta-modal-access-link"
-                >
-                  Open your review copy →
-                </a>
-                <p className="beta-modal-link-label">Access link</p>
-                <a
-                  href={BETA_ACCESS_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="beta-modal-link-url"
-                >
-                  {BETA_ACCESS_LINK}
-                </a>
-              </div>
-            ) : (
-              <>
-                <h2 id="beta-modal-title" className="beta-modal-title">Join the Beta</h2>
-                <p className="beta-modal-subtitle">
-                  Limited early access to the complete Awake OS protocol.
-                </p>
-                <form className="beta-modal-form" onSubmit={handleBetaSubmit}>
-                  <label className="beta-modal-field" htmlFor="beta-name">
-                    <span className="beta-modal-label">Name</span>
-                    <input
-                      id="beta-name"
-                      type="text"
-                      name="name"
-                      value={betaName}
-                      onChange={(e) => setBetaName(e.target.value)}
-                      className="beta-modal-input"
-                      placeholder="Your name"
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-                  <label className="beta-modal-field" htmlFor="beta-email">
-                    <span className="beta-modal-label">Email</span>
-                    <input
-                      id="beta-email"
-                      type="email"
-                      name="email"
-                      value={betaEmail}
-                      onChange={(e) => setBetaEmail(e.target.value)}
-                      className="beta-modal-input"
-                      placeholder="you@example.com"
-                      autoComplete="email"
-                      required
-                    />
-                  </label>
-                  <button type="submit" className="btn-luminous beta-modal-submit">
-                    Submit
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Cover lightbox */}
+      {/* Cover Lightbox */}
       {coverLightbox && (
         <div
           className="cover-lightbox"
@@ -690,7 +548,6 @@ export default function AwakeOS() {
               ×
             </button>
             <p className="cover-lightbox-title">{lightboxAssets[coverLightbox].title}</p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={lightboxAssets[coverLightbox].src}
               alt={lightboxAssets[coverLightbox].alt}
