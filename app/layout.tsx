@@ -16,6 +16,9 @@ const jetbrains = JetBrains_Mono({
 
 const SITE_URL = "https://awake-os.com";
 
+/** Cache-bust: bump when the brand mark changes */
+const FAVICON_V = "2";
+
 const siteDescription =
   "Awake OS is the operating manual for your mind — a practical protocol to reboot your nervous system, end the hidden stress loop, and reclaim calm, clarity, and authentic presence. By Ariel Uri · Somatic Labs Publishing.";
 
@@ -41,7 +44,13 @@ export const metadata: Metadata = {
   creator: "Ariel Uri",
   publisher: "Somatic Labs Publishing",
   alternates: {
-    canonical: "/",
+    canonical: "/en",
+    languages: {
+      en: "/en",
+      pt: "/pt",
+      es: "/es",
+      "x-default": "/en",
+    },
   },
   openGraph: {
     type: "website",
@@ -53,8 +62,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/awake-os-cover.jpg",
-        width: 1650,
-        height: 2550,
+        width: 1801,
+        height: 2702,
         alt: "Awake OS book cover — turquoise neural network on deep teal",
       },
     ],
@@ -71,11 +80,25 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico" },
+      { url: `/favicon.svg?v=${FAVICON_V}`, type: "image/svg+xml" },
+      { url: `/favicon-32.png?v=${FAVICON_V}`, sizes: "32x32", type: "image/png" },
+      { url: `/favicon-48.png?v=${FAVICON_V}`, sizes: "48x48", type: "image/png" },
+      { url: `/favicon.ico?v=${FAVICON_V}`, sizes: "any" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: `/favicon.ico?v=${FAVICON_V}`,
+    apple: [
+      {
+        url: `/apple-touch-icon.png?v=${FAVICON_V}`,
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: `/favicon.svg?v=${FAVICON_V}`,
+      },
+    ],
   },
 };
 
@@ -86,9 +109,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} h-full antialiased`}>
-      <body className="min-h-full text-[#FFFFFF]">
-        {children}
-      </body>
+      <head>
+        {/* Explicit favicon links with cache-bust — force neural cyan/orange mark */}
+        <link rel="icon" href={`/favicon.svg?v=${FAVICON_V}`} type="image/svg+xml" />
+        <link
+          rel="icon"
+          href={`/favicon-32.png?v=${FAVICON_V}`}
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href={`/favicon-48.png?v=${FAVICON_V}`}
+          type="image/png"
+          sizes="48x48"
+        />
+        <link rel="shortcut icon" href={`/favicon.ico?v=${FAVICON_V}`} />
+        <link
+          rel="apple-touch-icon"
+          href={`/apple-touch-icon.png?v=${FAVICON_V}`}
+          sizes="180x180"
+        />
+      </head>
+      <body className="min-h-full text-[#FFFFFF]">{children}</body>
     </html>
   );
 }
