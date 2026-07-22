@@ -369,6 +369,41 @@ h4, h5 {
     0 20px 48px -12px rgba(0, 0, 0, 0.26);
 }
 
+/* Centered full-jacket showcase — The Book section */
+.book-spread-featured {
+  margin-inline: auto;
+  border-radius: 1rem;
+  background: rgba(11, 31, 46, 0.35);
+  box-shadow:
+    0 0 40px rgba(64, 240, 216, 0.22),
+    0 0 80px rgba(0, 229, 192, 0.12),
+    0 28px 56px -18px rgba(0, 0, 0, 0.4);
+}
+
+.book-spread-featured:hover,
+.book-cover-clickable.book-spread-featured:hover {
+  transform: scale(1.015);
+  box-shadow:
+    0 0 52px rgba(64, 240, 216, 0.34),
+    0 0 100px rgba(0, 229, 192, 0.18),
+    0 32px 64px -16px rgba(0, 0, 0, 0.36);
+}
+
+.book-spread-featured::before {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 85% 70% at 50% 50%,
+    rgba(0, 229, 192, 0.14) 0%,
+    transparent 72%
+  );
+  filter: blur(28px);
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Author portrait — compact with turquoise aura */
 .author-portrait {
   border: 1px solid rgba(64, 240, 216, 0.32);

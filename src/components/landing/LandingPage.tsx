@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,12 +31,6 @@ const NeuralUniverse = dynamic(() => import('@/components/three/NeuralUniverse')
   ),
 });
 
-interface BookTrace {
-  x: number;
-  y: number;
-  t: number;
-}
-
 interface LandingPageProps {
   locale: Locale;
   dict: Dictionary;
@@ -55,15 +49,11 @@ const SECTION_MOOD: Record<string, NeuralMood> = {
 };
 
 export default function LandingPage({ locale, dict }: LandingPageProps) {
-  const [bookOpened, setBookOpened] = useState(false);
-  const [traces, setTraces] = useState<BookTrace[]>([]);
-  const [isReturnVisit, setIsReturnVisit] = useState(false);
   const [coverLightbox, setCoverLightbox] = useState<LightboxKey | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [booting, setBooting] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
   const [heroMood, setHeroMood] = useState<NeuralMood>('boot');
-  const substrateRef = useRef<HTMLDivElement>(null);
 
   const openModal = useCallback(() => setModalOpen(true), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
@@ -172,26 +162,12 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
 
   useEffect(() => {
     try {
-      const opened = localStorage.getItem('awakeOS_bookOpened') === 'true';
-      const savedTraces = localStorage.getItem('awakeOS_bookTraces');
       const visitCount = parseInt(localStorage.getItem('awakeOS_visitCount') || '0', 10);
-      setBookOpened(opened);
-      if (savedTraces) setTraces(JSON.parse(savedTraces));
-      if (visitCount > 1 || opened) setIsReturnVisit(true);
       localStorage.setItem('awakeOS_visitCount', String(visitCount + 1));
     } catch {
       /* ignore */
     }
   }, []);
-
-  useEffect(() => {
-    try {
-      if (bookOpened) localStorage.setItem('awakeOS_bookOpened', 'true');
-      if (traces.length > 0) localStorage.setItem('awakeOS_bookTraces', JSON.stringify(traces));
-    } catch {
-      /* ignore */
-    }
-  }, [bookOpened, traces]);
 
   useEffect(() => {
     const ids = [
@@ -231,47 +207,6 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
     elements.forEach(({ el }) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
-
-  const handleBookRitualInteraction = (e: React.MouseEvent | React.TouchEvent) => {
-    const container = substrateRef.current;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    const y = ((clientY - rect.top) / rect.height) * 100;
-
-    if (!bookOpened) {
-      setBookOpened(true);
-      triggerNeuralWave(1.6);
-      setTimeout(() => triggerNeuralWave(1.15), 180);
-      setTimeout(() => triggerNeuralWave(0.9), 520);
-      const frame = document.getElementById('neural-book-frame');
-      if (frame) {
-        frame.style.transition = 'box-shadow 420ms cubic-bezier(0.23,1,0.32,1)';
-        frame.style.boxShadow =
-          '0 28px 68px -18px rgba(0,0,0,0.68), 0 10px 28px -10px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.115), inset 0 -1px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(64,240,216,0.32), 0 0 48px -6px rgba(0,229,192,0.38)';
-        setTimeout(() => {
-          if (frame) frame.style.boxShadow = '';
-        }, 1350);
-      }
-    }
-
-    if (bookOpened && traces.length < 9) {
-      const newTrace: BookTrace = {
-        x: Math.max(6, Math.min(94, x + (Math.random() - 0.5) * 1.6)),
-        y: Math.max(8, Math.min(91, y + (Math.random() - 0.5) * 1.4)),
-        t: Date.now(),
-      };
-      if (Math.random() < 0.72 || traces.length < 2) {
-        setTraces((prev) => [...prev, newTrace].slice(-9));
-      }
-    }
-
-    if (isReturnVisit && Math.random() < 0.38) {
-      setTimeout(() => triggerNeuralWave(0.55), 90);
-    }
-  };
 
   const h = dict.hero;
   const book = dict.book;
@@ -377,14 +312,14 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
         </button>
       </header>
 
-      {/* THE BOOK */}
+      {/* THE BOOK — full jacket only, centered */}
       <section
         id="the-book"
-        className="relative py-14 sm:py-20 md:py-28 border-t border-[rgba(0,229,192,0.28)]"
+        className="relative py-16 sm:py-20 md:py-28 border-t border-[rgba(0,229,192,0.28)]"
       >
         <div className="absolute inset-0 bg-[rgba(0,229,192,0.03)] pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
-          <Reveal className="text-center mb-10 sm:mb-12 md:mb-16">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+          <Reveal className="text-center mb-10 sm:mb-12 md:mb-14">
             <span className="label text-[10px] sm:text-xs text-[#B8F5FF] tracking-[3.5px]">
               {book.label}
             </span>
@@ -396,78 +331,31 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
               {book.bodyAfter}
             </p>
           </Reveal>
-          <div className="grid md:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
-            <Reveal className="md:col-span-7 lg:col-span-8 flex flex-col order-1" delay={0.05}>
-              <p className="label text-[10px] text-[#40F0D8] tracking-[3px] mb-3 sm:mb-4 text-center md:text-left">
-                {book.spreadLabel}
-              </p>
-              <button
-                type="button"
-                onClick={() => setCoverLightbox('spread')}
-                className="book-spread-glow book-cover-clickable h-[240px] sm:h-[340px] md:h-[400px] lg:h-[480px] w-full flex items-center justify-center p-2 sm:p-3 cursor-zoom-in flex-1"
-                aria-label={book.spreadAria}
-              >
-                <Image
-                  src="/images/front-and-back-cover.jpg"
-                  alt={book.spreadAlt}
-                  width={3544}
-                  height={2625}
-                  className="pointer-events-none max-h-full max-w-full h-full w-auto object-contain rounded-md"
-                  sizes="(max-width: 640px) 92vw, (max-width: 768px) 90vw, 58vw"
-                  quality={82}
-                />
-              </button>
-              <p className="mt-2 sm:mt-3 text-[10px] text-[#B8F5FF]/80 tracking-[1px] text-center md:text-left">
-                {book.spreadHint}
-              </p>
-            </Reveal>
-            <Reveal className="md:col-span-5 lg:col-span-4 flex flex-col order-2" delay={0.12}>
-              <p className="label text-[10px] text-[#40F0D8] tracking-[3px] mb-3 sm:mb-4 text-center md:text-left">
-                {book.neuralLabel}
-              </p>
-              <div
-                id="neural-book-frame"
-                className="book-frame neural-frame book-section-neural relative w-full flex-1 min-h-[220px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] rounded-2xl p-2 sm:p-3"
-              >
-                <div className="relative w-full h-full min-h-[200px] sm:min-h-[260px] rounded-xl overflow-hidden bg-[#081824] border border-[rgba(0,229,192,0.28)]">
-                  <div
-                    ref={substrateRef}
-                    className="relative w-full h-full min-h-[190px] sm:min-h-[240px] cursor-grab active:cursor-grabbing touch-action-none overscroll-contain"
-                    style={{ touchAction: 'none' }}
-                    onClick={handleBookRitualInteraction}
-                    onTouchStart={handleBookRitualInteraction}
-                    role="img"
-                    aria-label={book.neuralAria}
-                  >
-                    <NeuralUniverse contained mood="calm" registerGlobal={false} />
-                    {traces.length > 0 && (
-                      <div className="absolute inset-0 pointer-events-none z-[3]">
-                        {traces.map((trace, idx) => (
-                          <div
-                            key={`${trace.t}-${idx}`}
-                            className="absolute w-[3px] h-[3px] rounded-full bg-[#FF6B35] opacity-[0.17] shadow-[0_0_3px_rgba(255,107,53,0.35)]"
-                            style={{
-                              left: `${trace.x}%`,
-                              top: `${trace.y}%`,
-                              transform: `translate(-50%, -50%) rotate(${(trace.t % 17) - 8}deg)`,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className="book-etch" />
-                  <div className="neural-vignette absolute inset-0 pointer-events-none rounded-xl" />
-                  <div className="neural-hint neural-hint-compact absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none select-none">
-                    {book.neuralHint}
-                  </div>
-                </div>
-              </div>
-              <p className="mt-3 text-[10px] text-[#B8F5FF]/80 tracking-[1px] text-center md:text-left">
-                {book.neuralCaption}
-              </p>
-            </Reveal>
-          </div>
+
+          <Reveal className="flex flex-col items-center" delay={0.06}>
+            <p className="label text-[10px] sm:text-xs text-[#40F0D8] tracking-[3px] mb-5 sm:mb-6 text-center">
+              {book.spreadLabel}
+            </p>
+            <button
+              type="button"
+              onClick={() => setCoverLightbox('spread')}
+              className="book-spread-glow book-cover-clickable book-spread-featured w-full max-w-[920px] flex items-center justify-center p-3 sm:p-5 md:p-6 cursor-zoom-in"
+              aria-label={book.spreadAria}
+            >
+              <Image
+                src="/images/front-and-back-cover.jpg"
+                alt={book.spreadAlt}
+                width={3544}
+                height={2625}
+                className="pointer-events-none w-full h-auto max-h-[min(58vh,420px)] sm:max-h-[min(62vh,520px)] md:max-h-[min(68vh,600px)] object-contain rounded-md"
+                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 88vw, 920px"
+                quality={85}
+              />
+            </button>
+            <p className="mt-4 text-[10px] sm:text-[11px] text-[#B8F5FF]/75 tracking-[1.2px] text-center">
+              {book.spreadHint}
+            </p>
+          </Reveal>
         </div>
       </section>
 
