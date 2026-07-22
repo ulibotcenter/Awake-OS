@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Privacy & Legal",
-  description:
-    "Privacy Policy, data protection, copyright, and legal disclaimers for Awake OS by Ariel Uri · Somatic Labs Publishing.",
-  alternates: {
-    canonical: "/privacy",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+import { notFound } from "next/navigation";
+import { isLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
 
 const LAST_UPDATED = "June 13, 2026";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : "en";
+  const dict = await getDictionary(locale);
+  return {
+    title: dict.privacy.title,
+    description:
+      "Privacy Policy, data protection, copyright, and legal disclaimers for Awake OS by Ariel Uri · Somatic Labs Publishing.",
+    alternates: {
+      canonical: `/${locale}/privacy`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 function PrivacySection({
   id,
@@ -33,19 +45,29 @@ function PrivacySection({
   );
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  if (!isLocale(raw)) notFound();
+  const locale = raw as Locale;
+  const dict = await getDictionary(locale);
+  const home = `/${locale}`;
+
   return (
     <div className="privacy-page min-h-screen flex flex-col">
       <header className="privacy-header glass-strong border-b border-[rgba(0,229,192,0.28)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 h-16 sm:h-20 flex items-center justify-between">
           <Link
-            href="/"
+            href={home}
             className="text-xl sm:text-2xl font-semibold tracking-[-0.04em] text-[#E8FFFE] hover:text-[#FFFFFF] transition-colors"
           >
             Awake OS
           </Link>
-          <Link href="/" className="privacy-back-link text-sm font-medium">
-            ← Back to Home
+          <Link href={home} className="privacy-back-link text-sm font-medium">
+            {dict.privacy.back}
           </Link>
         </div>
       </header>
@@ -57,10 +79,10 @@ export default function PrivacyPage() {
               LEGAL
             </span>
             <h1 className="section-title mt-3 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.035em]">
-              Privacy &amp; Legal
+              {dict.privacy.title}
             </h1>
             <p className="privacy-updated mt-3 text-xs sm:text-sm text-[#B8F5FF]">
-              Last updated: {LAST_UPDATED}
+              {dict.privacy.updated}: {LAST_UPDATED}
             </p>
             <div className="privacy-divider mt-6 mb-10" aria-hidden="true" />
 
@@ -92,13 +114,13 @@ export default function PrivacyPage() {
                     awake-os.com
                   </a>{' '}
                   (the &quot;Site&quot;), the Awake OS book and related materials (the
-                  &quot;Content&quot;), and any beta access program operated by Ariel Uri and Somatic
+                  &quot;Content&quot;), and any pre-launch list operated by Ariel Uri and Somatic
                   Labs Publishing (collectively, &quot;we,&quot; &quot;us,&quot; or
                   &quot;our&quot;).
                 </p>
                 <p>
-                  By accessing the Site, submitting information through our forms, joining the Beta
-                  program, or using any Content, you acknowledge that you have read, understood, and
+                  By accessing the Site, submitting information through our forms, joining the
+                  pre-launch list, or using any Content, you acknowledge that you have read, understood, and
                   agree to be bound by this Policy in its entirety. If you do not agree, you must
                   discontinue use of the Site and Content immediately.
                 </p>
@@ -114,8 +136,8 @@ export default function PrivacyPage() {
                 <p>We may collect the following categories of information:</p>
                 <ul className="privacy-list">
                   <li>
-                    <strong className="text-[#FFFFFF]">Beta registration data:</strong> When you
-                    request Beta access, we collect your <strong>name</strong> and{' '}
+                    <strong className="text-[#FFFFFF]">Pre-launch registration data:</strong> When you
+                    join the pre-launch list, we collect your <strong>name</strong> and{' '}
                     <strong>email address</strong> as voluntarily submitted through the Site&apos;s
                     registration form.
                   </li>
@@ -150,18 +172,18 @@ export default function PrivacyPage() {
                   use your information to:
                 </p>
                 <ul className="privacy-list">
-                  <li>Evaluate, approve, or manage Beta access requests;</li>
-                  <li>Deliver access links, updates, and communications related to Awake OS;</li>
+                  <li>Manage the pre-launch list and launch communications;</li>
+                  <li>Deliver updates and communications related to Awake OS;</li>
                   <li>Operate, maintain, secure, and improve the Site and Content;</li>
                   <li>Respond to inquiries and enforce our rights under this Policy;</li>
                   <li>Comply with applicable laws, regulations, and lawful requests;</li>
                   <li>Detect, prevent, and address fraud, abuse, or security incidents.</li>
                 </ul>
                 <p>
-                  By submitting your name and email for Beta access, you expressly consent to such
+                  By submitting your name and email for the pre-launch list, you expressly consent to such
                   processing. You may withdraw consent at any time by contacting us; however,
                   withdrawal does not affect the lawfulness of processing prior to withdrawal and may
-                  result in termination of Beta access.
+                  result in removal from the list.
                 </p>
                 <p>
                   We do <strong className="text-[#FFFFFF]">not</strong> sell, rent, or trade your
@@ -183,9 +205,9 @@ export default function PrivacyPage() {
                     confidentiality and data-processing obligations;
                   </li>
                   <li>
-                    <strong className="text-[#FFFFFF]">Beta fulfillment partners:</strong> Platforms
-                    used to distribute review copies or manage early access (e.g., digital
-                    publishing or reviewer platforms), solely to fulfill your Beta request;
+                    <strong className="text-[#FFFFFF]">Launch partners:</strong> Platforms
+                    used to distribute the book or manage early access (e.g., digital
+                    publishing platforms), solely to fulfill launch-related requests;
                   </li>
                   <li>
                     <strong className="text-[#FFFFFF]">Legal requirements:</strong> When required
@@ -373,7 +395,7 @@ export default function PrivacyPage() {
                 </p>
                 <p>
                   <strong className="text-[#FFFFFF]">Additional limitations:</strong> The Site,
-                  Content, and Beta program are provided on an &quot;AS IS&quot; and &quot;AS
+                  Content, and pre-launch list are provided on an &quot;AS IS&quot; and &quot;AS
                   AVAILABLE&quot; basis without warranties of any kind, whether express, implied, or
                   statutory, including but not limited to warranties of merchantability, fitness for
                   a particular purpose, accuracy, non-infringement, or uninterrupted availability.
@@ -382,8 +404,8 @@ export default function PrivacyPage() {
                   To the maximum extent permitted by applicable law, Ariel Uri, Somatic Labs
                   Publishing, and their officers, employees, agents, and affiliates shall not be
                   liable for any direct, indirect, incidental, special, consequential, exemplary, or
-                  punitive damages arising from or related to your use of the Site, Content, or Beta
-                  program — including loss of profits, data, goodwill, or personal injury — even if
+                  punitive damages arising from or related to your use of the Site, Content, or pre-launch
+                  list — including loss of profits, data, goodwill, or personal injury — even if
                   advised of the possibility of such damages.
                 </p>
                 <p>
@@ -441,8 +463,8 @@ export default function PrivacyPage() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-[rgba(0,229,192,0.2)]">
-              <Link href="/" className="privacy-home-link inline-flex items-center gap-2 text-sm font-medium">
-                ← Return to Awake OS
+              <Link href={home} className="privacy-home-link inline-flex items-center gap-2 text-sm font-medium">
+                {dict.privacy.return}
               </Link>
             </div>
           </div>
