@@ -25,7 +25,7 @@ export default function ScrollProgress({ activeId, dict, onJump }: ScrollProgres
   );
 
   return (
-    <div className="system-rail hidden lg:flex fixed left-5 top-1/2 -translate-y-1/2 z-40 flex-col gap-3">
+    <div className="system-rail hidden lg:flex fixed left-3 xl:left-4 top-1/2 -translate-y-1/2 z-30 flex-col gap-2.5 pointer-events-none">
       {STEPS.map((step, i) => {
         const active = i === activeIndex || (activeId === 'hero' && i === 0);
         const done = i < activeIndex;
@@ -34,7 +34,7 @@ export default function ScrollProgress({ activeId, dict, onJump }: ScrollProgres
             key={step.id}
             type="button"
             onClick={() => onJump(step.id === 'hero' ? 'top' : step.id)}
-            className="group flex items-center gap-2 text-left"
+            className="group flex items-center gap-2 text-left pointer-events-auto max-w-[7.5rem]"
             aria-current={active ? 'step' : undefined}
           >
             <span

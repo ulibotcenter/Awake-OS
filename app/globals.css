@@ -1050,6 +1050,17 @@ h4, h5 {
 .accent-cyan { border-top: 2.5px solid var(--accent-cyan); }
 .accent-gold { border-top: 2.5px solid var(--accent-gold); }
 
+/* System progress rail — stay clear of hero copy */
+.system-rail {
+  width: max-content;
+  max-width: 7.75rem;
+}
+
+.system-rail .label {
+  line-height: 1.15;
+  word-break: break-word;
+}
+
 /* Navbar links (V1) */
 .nav-link {
   position: relative;

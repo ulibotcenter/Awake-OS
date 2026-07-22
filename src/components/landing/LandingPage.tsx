@@ -241,7 +241,7 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
           <AmbientParticles count={42} className="opacity-60" />
         </div>
 
-        <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-8 sm:pt-12 pb-14 sm:pb-20 w-full pointer-events-none">
+        <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:pl-36 lg:pr-16 xl:pl-40 xl:pr-16 pt-8 sm:pt-12 pb-14 sm:pb-20 w-full pointer-events-none">
           <div className="grid md:grid-cols-12 gap-y-10 gap-x-8 lg:gap-x-12 items-center">
             <div className="md:col-span-5 lg:col-span-5 max-w-[38rem] text-center md:text-left mx-auto md:mx-0 w-full pointer-events-auto">
               <motion.div
