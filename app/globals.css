@@ -511,7 +511,7 @@ h4, h5 {
   color: #B8F5FF;
 }
 
-/* Join Beta modal */
+/* Pre-launch / legacy beta modal shell */
 .beta-modal {
   position: fixed;
   inset: 0;
@@ -967,6 +967,108 @@ h4, h5 {
   backdrop-filter: blur(28px);
   border: 1px solid rgba(64, 240, 216, 0.3);
   box-shadow: 0 0 72px rgba(64, 240, 216, 0.22);
+}
+
+/* Epic install CTA */
+.final-cta-epic {
+  box-shadow:
+    0 0 80px rgba(64, 240, 216, 0.28),
+    0 0 140px rgba(0, 229, 192, 0.12),
+    0 0 100px rgba(255, 107, 53, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.final-cta-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(64, 240, 216, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 240, 216, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+
+.final-cta-ring {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: min(520px, 88vw);
+  height: min(520px, 88vw);
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  border: 1px solid rgba(64, 240, 216, 0.18);
+  box-shadow: 0 0 40px rgba(64, 240, 216, 0.08);
+  animation: cta-ring 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.final-cta-ring-delay {
+  width: min(380px, 70vw);
+  height: min(380px, 70vw);
+  border-color: rgba(255, 107, 53, 0.14);
+  animation-delay: -2.5s;
+  animation-duration: 10s;
+}
+
+@keyframes cta-ring {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.96); }
+  50% { opacity: 0.75; transform: translate(-50%, -50%) scale(1.04); }
+}
+
+.btn-epic {
+  box-shadow:
+    0 0 24px rgba(64, 240, 216, 0.5),
+    0 0 56px rgba(64, 240, 216, 0.28),
+    0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+.prelaunch-modal-panel {
+  overflow: hidden;
+}
+
+.prelaunch-modal-orbit {
+  position: absolute;
+  inset: -40% -20% auto;
+  height: 70%;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(64, 240, 216, 0.18), transparent 70%),
+    radial-gradient(ellipse 30% 30% at 80% 30%, rgba(255, 107, 53, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.prelaunch-success-ring {
+  box-shadow: 0 0 32px rgba(64, 240, 216, 0.45), 0 0 64px rgba(64, 240, 216, 0.2);
+}
+
+.floating-book {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.floating-book-aura {
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    rgba(64, 240, 216, 0.22),
+    transparent 70%
+  );
+  filter: blur(18px);
+}
+
+.module-locked:hover {
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+}
+
+.boot-overlay {
+  background: #050f16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-cta-ring,
+  .floating-book-aura {
+    animation: none !important;
+  }
 }
 
 /* Site footer */

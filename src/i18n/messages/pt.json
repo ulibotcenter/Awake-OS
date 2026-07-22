@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "title": "Awake OS — O Manual de Operação da Sua Mente",
+    "description": "Awake OS é o manual de operação da sua mente — um protocolo prático para reiniciar o sistema nervoso, encerrar o loop oculto de estresse e recuperar calma, clareza e presença autêntica. Por Ariel Uri · Somatic Labs Publishing."
+  },
+  "nav": {
+    "premise": "A Premissa",
+    "architecture": "A Arquitetura",
+    "modules": "Os Módulos",
+    "architect": "O Arquiteto",
+    "cta": "Entrar na Lista de Pré-Lançamento",
+    "ctaShort": "Pré-Lançamento"
+  },
+  "boot": {
+    "status": "AWAKE OS // INICIALIZANDO",
+    "line1": "Carregando substrato neural…",
+    "line2": "Calibrando sistema nervoso…",
+    "line3": "Pronto para o upgrade."
+  },
+  "hero": {
+    "author": "ARIEL URI",
+    "title": "Awake OS",
+    "subtitle": "O Manual de Operação da Sua Mente",
+    "tagline": "Faça o upgrade da Mente. Reinicie o Hardware.",
+    "lead": "Você não foi feito para este mundo — mas pode fazer o",
+    "leadHighlight": "upgrade",
+    "bodyBefore": "Encerre o",
+    "bodyHighlight1": "loop oculto de estresse",
+    "bodyMid": "e recupere",
+    "bodyHighlight2": "calma, clareza e presença autêntica",
+    "bodyAfter": "— sem meditação sem fim.",
+    "badge": "O HARDWARE RESET",
+    "cta": "Entrar na Lista de Pré-Lançamento",
+    "ctaMobile": "Pré-Lançamento",
+    "trust": "Acesso no lançamento · Sem spam · Só resultados",
+    "scroll": "ROLE PARA INICIAR",
+    "coverAria": "Ver capa de Awake OS ampliada",
+    "coverAlt": "Awake OS — capa frontal"
+  },
+  "systemStatus": {
+    "boot": "BOOT",
+    "diagnostic": "DIAGNÓSTICO",
+    "architecture": "ARQUITETURA",
+    "modules": "MÓDULOS",
+    "architect": "ARQUITETO",
+    "install": "INSTALAR"
+  },
+  "book": {
+    "label": "O MANUAL DE OPERAÇÃO",
+    "title": "O Livro",
+    "body": "O protocolo completo",
+    "bodyHighlight": "Awake OS",
+    "bodyAfter": "— mente como software, corpo como hardware — em um guia luminoso.",
+    "spreadLabel": "JAQUETA COMPLETA — FRENTE E VERSO",
+    "spreadHint": "Toque para ler o texto da contracapa",
+    "spreadAria": "Ver jaqueta completa ampliada",
+    "spreadAlt": "Awake OS — capa e contracapa com texto completo",
+    "neuralLabel": "CAMPO NEURAL",
+    "neuralAria": "Substrato neural vivo — arraste para girar, toque para acalmar",
+    "neuralHint": "ARRASTE — TOQUE",
+    "neuralCaption": "Arraste para girar · Toque para acalmar"
+  },
+  "overload": {
+    "title": "Seu Sistema Está Sobrecarregado.",
+    "body": "A vida moderna roda scripts corrompidos na sua mente. Abas infinitas, fadiga de decisão e estresse crônico consomem sua largura de banda. É hora de um reboot."
+  },
+  "architecture": {
+    "label": "A FUNDAÇÃO",
+    "title": "A Arquitetura",
+    "softwareLabel": "CAMADA DE SOFTWARE",
+    "softwareTitle": "Mente = SO",
+    "softwareP1": "Sua mente roda software desatualizado. Notificações constantes e feeds infinitos consomem seus recursos cognitivos.",
+    "softwareP2": "Awake OS ensina a auditar seus algoritmos internos, recuperar largura de banda mental e instalar protocolos mais limpos de foco e presença.",
+    "hardwareLabel": "CAMADA FÍSICA",
+    "hardwareTitle": "Corpo = Hardware",
+    "hardwareP1": "Seu sistema nervoso é o hardware que roda o sistema operacional. O estresse crônico o deixou em alerta permanente.",
+    "hardwareP2": "Com resets somáticos precisos de 60 segundos, Awake OS mostra como aterrar o hardware e restaurar a regulação natural."
+  },
+  "modules": {
+    "label": "PROTOCOLOS DO SISTEMA",
+    "title": "Os Módulos",
+    "intro": "Doze protocolos precisos para auditar e reescrever seu sistema operacional interno.",
+    "m01Label": "MÓDULO 01",
+    "m01Title": "O Kernel Panic",
+    "m01Body": "Reconhecer quando o sistema travou e como executar um desligamento de emergência antes do dano permanente.",
+    "m02Label": "MÓDULO 02",
+    "m02Title": "Safe Mode",
+    "m02Body": "Inicializar em um estado mínimo, onde só processos essenciais rodam, para isolar e remover padrões mentais corrompidos.",
+    "m03Label": "MÓDULO 03",
+    "m03Title": "Task Manager",
+    "m03Body": "Identificar quais processos em segundo plano consomem sua atenção e como encerrá-los com precisão.",
+    "more": "+ 9 PROTOCOLOS NO SISTEMA COMPLETO",
+    "locked": "BLOQUEADO",
+    "lockedHint": "Criptografado até o lançamento — entre na lista para desbloquear primeiro"
+  },
+  "architect": {
+    "label": "O CRIADOR",
+    "title": "Ariel Uri",
+    "lead": "Ariel Uri engenhou o protocolo Awake OS não como místico, mas como arquiteto de sistemas da condição humana.",
+    "body": "Após anos no cruzamento entre neurociência, pensamento sistêmico e prática contemplativa, construiu um framework prático para o upgrade do sistema operacional humano.",
+    "logoAria": "Ver logo da Somatic Labs Publishing ampliada",
+    "logoAlt": "Somatic Labs Publishing"
+  },
+  "finalCta": {
+    "eyebrow": "SEQUÊNCIA DE INSTALAÇÃO",
+    "status": "SISTEMA PRONTO",
+    "title": "Pronto para o reboot?",
+    "subtitle": "Instale o Awake OS",
+    "body": "O acesso de pré-lançamento está aberto. Seja o primeiro quando o manual da mente for ao ar.",
+    "launchNote": "Lançamento nas próximas semanas",
+    "button": "Entrar na Lista de Pré-Lançamento",
+    "trust": "Sem spam. Sem meditação sem fim. Só resultados.",
+    "perk1": "Primeiro acesso no lançamento",
+    "perk2": "Sinal de preço de lançamento",
+    "perk3": "Protocolo zero spam"
+  },
+  "footer": {
+    "copy": "Copyright © 2026 Ariel Uri / Somatic Labs Publishing. Todos os direitos reservados.",
+    "privacy": "Privacidade e Legal"
+  },
+  "modal": {
+    "title": "Lista de Pré-Lançamento",
+    "subtitle": "Garanta seu lugar antes do Awake OS ir ao ar. Só sinal de lançamento — sem spam.",
+    "name": "Nome completo",
+    "namePlaceholder": "Seu nome",
+    "email": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "submit": "Garantir minha vaga",
+    "loading": "Registrando…",
+    "success": "Você está na lista.",
+    "successSub": "Sinal de lançamento a caminho. Seu upgrade começa no momento em que formos ao ar.",
+    "continue": "Continuar explorando",
+    "error": "Algo deu errado. Verifique os dados e tente de novo.",
+    "close": "Fechar"
+  },
+  "lightbox": {
+    "front": "Capa frontal",
+    "spread": "Jaqueta completa — frente e verso",
+    "logo": "Somatic Labs Publishing",
+    "close": "Fechar visualização ampliada",
+    "hint": "Pressione Escape ou clique fora para fechar"
+  },
+  "privacy": {
+    "back": "← Voltar ao início",
+    "return": "← Voltar ao Awake OS",
+    "title": "Privacidade e Legal",
+    "updated": "Última atualização"
+  }
+}
