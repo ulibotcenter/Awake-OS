@@ -1059,6 +1059,144 @@ h4, h5 {
     0 8px 28px rgba(0, 0, 0, 0.25);
 }
 
+/* Launch countdown — orange hardware signal */
+.launch-countdown {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.launch-countdown-eyebrow {
+  margin: 0;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 53, 0.85);
+  text-shadow: 0 0 16px rgba(255, 107, 53, 0.35);
+}
+
+.launch-countdown-units {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.launch-countdown-unit-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.launch-countdown-sep {
+  display: none;
+  padding: 0 0.15rem 1.1rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: rgba(255, 107, 53, 0.45);
+  line-height: 1;
+}
+
+@media (min-width: 480px) {
+  .launch-countdown-sep {
+    display: block;
+  }
+}
+
+.launch-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.5rem;
+  padding: 0.65rem 0.55rem 0.55rem;
+  margin: 0 0.2rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 107, 53, 0.32);
+  background:
+    linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, rgba(11, 31, 46, 0.75) 100%);
+  box-shadow:
+    0 0 20px rgba(255, 107, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+@media (min-width: 640px) {
+  .launch-countdown-unit {
+    min-width: 4.25rem;
+    padding: 0.8rem 0.7rem 0.65rem;
+    margin: 0 0.25rem;
+  }
+}
+
+.launch-countdown-value {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #FF6B35;
+  text-shadow:
+    0 0 18px rgba(255, 107, 53, 0.55),
+    0 0 36px rgba(255, 107, 53, 0.25);
+}
+
+.launch-countdown-label {
+  margin-top: 0.4rem;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 53, 0.72);
+}
+
+.launch-countdown-live {
+  flex-direction: row;
+  gap: 0.55rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.launch-countdown-live-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: #FF6B35;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
+  animation: neural-pulse 1.6s ease-in-out infinite;
+}
+
+.launch-countdown-live-text {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FF6B35;
+}
+
+.final-cta-closing {
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+  color: #E0F7FF;
+  font-weight: 400;
+  text-wrap: balance;
+  border-top: 1px solid rgba(64, 240, 216, 0.18);
+  padding-top: 1.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-countdown-live-dot {
+    animation: none;
+  }
+}
+
 .prelaunch-modal-panel {
   overflow: hidden;
 }

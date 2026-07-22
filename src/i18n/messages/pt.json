@@ -107,12 +107,19 @@
     "title": "Pronto para o reboot?",
     "subtitle": "Instale o Awake OS",
     "body": "O acesso de pré-lançamento está aberto. Seja o primeiro quando o manual da mente for ao ar.",
-    "launchNote": "Lançamento nas próximas semanas",
+    "launchNote": "Lançamento · 27 de julho de 2026 · 10:00 CEST",
     "button": "Entrar na Lista de Pré-Lançamento",
     "trust": "Sem spam. Sem meditação sem fim. Só resultados.",
     "perk1": "Primeiro acesso no lançamento",
     "perk2": "Sinal de preço de lançamento",
-    "perk3": "Protocolo zero spam"
+    "perk3": "Protocolo zero spam",
+    "countdownLabel": "O SINAL ABRE EM",
+    "days": "Dias",
+    "hours": "Horas",
+    "minutes": "Min",
+    "seconds": "Seg",
+    "countdownLive": "Sistema no ar",
+    "closing": "A mente que você adia espera por uma instalação limpa. Esta é a janela aberta."
   },
   "footer": {
     "copy": "Copyright © 2026 Ariel Uri / Somatic Labs Publishing. Todos os direitos reservados.",

@@ -107,12 +107,19 @@
     "title": "Ready to reboot?",
     "subtitle": "Install Awake OS",
     "body": "Pre-launch access opens now. Be first when the operating manual for your mind goes live.",
-    "launchNote": "Launching in the next few weeks",
+    "launchNote": "Launch · July 27, 2026 · 10:00 CEST",
     "button": "Join the Pre-Launch List",
     "trust": "No spam. No endless meditation. Just results.",
     "perk1": "First access at launch",
     "perk2": "Launch pricing signal",
-    "perk3": "Zero spam protocol"
+    "perk3": "Zero spam protocol",
+    "countdownLabel": "SIGNAL OPENS IN",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Min",
+    "seconds": "Sec",
+    "countdownLive": "System is live",
+    "closing": "The mind you keep postponing is waiting for a clean install. This is the open window."
   },
   "footer": {
     "copy": "Copyright © 2026 Ariel Uri / Somatic Labs Publishing. All rights reserved.",

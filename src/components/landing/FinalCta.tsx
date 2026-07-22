@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import type { Dictionary } from '@/i18n/get-dictionary';
 import Reveal from './Reveal';
 import AmbientParticles from './AmbientParticles';
+import LaunchCountdown from './LaunchCountdown';
 
 interface FinalCtaProps {
   dict: Dictionary['finalCta'];
@@ -76,7 +77,22 @@ export default function FinalCta({ dict, onCta }: FinalCtaProps) {
                 </span>
               </motion.button>
 
-              <div className="mt-8 text-xs text-[#B8F5FF] tracking-[1px]">{dict.trust}</div>
+              <LaunchCountdown
+                labels={{
+                  label: dict.countdownLabel,
+                  days: dict.days,
+                  hours: dict.hours,
+                  minutes: dict.minutes,
+                  seconds: dict.seconds,
+                  live: dict.countdownLive,
+                }}
+              />
+
+              <div className="mt-6 text-xs text-[#B8F5FF] tracking-[1px]">{dict.trust}</div>
+
+              <p className="final-cta-closing mt-8 sm:mt-10 max-w-md mx-auto">
+                {dict.closing}
+              </p>
             </div>
           </div>
         </Reveal>
