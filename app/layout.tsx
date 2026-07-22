@@ -22,7 +22,7 @@ const siteDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Awake OS | The Hardware Reset",
+    default: "Awake OS — The Operating Manual for Your Mind",
     template: "%s | Awake OS",
   },
   description: siteDescription,

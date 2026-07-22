@@ -4,9 +4,7 @@ import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
-
-// Inspired by https://threejs.org/examples/?q=draw#webgl_buffergeometry_drawrange
-// Adapted from https://sbedit.net/13e2dc0d5ac4e00edb757c9042d3a61d2c6cd00b
+import type { NeuralMood } from '@/lib/neural-api';
 
 const CYAN = new THREE.Color('#5EC8B8');
 const CYAN_BRIGHT = new THREE.Color('#88EEFF');
@@ -19,19 +17,42 @@ interface ParticleData {
   phase: number;
 }
 
-function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
+const MOOD_CFG: Record<
+  NeuralMood,
+  { speed: number; pulseTarget: number; opacity: number; rot: number; accentBias: number }
+> = {
+  boot: { speed: 0.9, pulseTarget: 1.05, opacity: 0.78, rot: 0.028, accentBias: 0.2 },
+  calm: { speed: 0.75, pulseTarget: 1, opacity: 0.82, rot: 0.02, accentBias: 0.15 },
+  overload: { speed: 1.55, pulseTarget: 1.35, opacity: 0.92, rot: 0.055, accentBias: 0.45 },
+  stable: { speed: 0.85, pulseTarget: 1.08, opacity: 0.85, rot: 0.022, accentBias: 0.22 },
+  focus: { speed: 1.05, pulseTarget: 1.15, opacity: 0.88, rot: 0.032, accentBias: 0.3 },
+  install: { speed: 1.2, pulseTarget: 1.28, opacity: 0.95, rot: 0.04, accentBias: 0.4 },
+};
+
+function SphericalNeuralNetworkScene({
+  contained,
+  interactive,
+  mood,
+  registerGlobal,
+}: {
+  contained: boolean;
+  interactive: boolean;
+  mood: NeuralMood;
+  registerGlobal: boolean;
+}) {
   const groupRef = useRef<THREE.Group>(null!);
   const particlesRef = useRef<THREE.BufferGeometry>(null!);
   const linesGeometryRef = useRef<THREE.BufferGeometry>(null!);
   const pulseRef = useRef(1);
+  const moodRef = useRef<NeuralMood>(mood);
   const lastMoveRef = useRef(Date.now());
 
-  const maxParticleCount = contained ? 400 : 600;
-  const particleCount = contained ? 220 : 350;
-  const radius = contained ? 2.6 : 4.5;
+  const maxParticleCount = contained ? 400 : 560;
+  const particleCount = contained ? 220 : 320;
+  const radius = contained ? 2.6 : 4.8;
   const radiusHalf = radius / 2;
   const maxConnections = 16;
-  const minDistance = contained ? 0.68 : 1.15;
+  const minDistance = contained ? 0.68 : 1.2;
   const minDistanceSq = minDistance * minDistance;
 
   const segments = maxParticleCount * maxParticleCount;
@@ -83,8 +104,8 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
   const accentLineColor = useMemo(() => ORANGE.clone().lerp(CYAN_BRIGHT, 0.35), []);
 
   useEffect(() => {
-    console.log('✅ SphericalNeuralNetwork v1 loaded');
-  }, []);
+    moodRef.current = mood;
+  }, [mood]);
 
   useEffect(() => {
     if (particlesRef.current) {
@@ -105,9 +126,13 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
   }, []);
 
   useEffect(() => {
+    if (!registerGlobal) return;
     const api = {
       triggerCalmingWave: (strength = 1) => {
-        pulseRef.current = Math.min(1.8, pulseRef.current + strength * 0.35);
+        pulseRef.current = Math.min(1.9, pulseRef.current + strength * 0.35);
+      },
+      setMood: (next: NeuralMood) => {
+        moodRef.current = next;
       },
       getRenderData: () => {
         const specials = accentIndices.slice(0, 4).map((idx) => {
@@ -135,10 +160,11 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
     return () => {
       delete (window as Window & { __awakeNeuralSim?: typeof api }).__awakeNeuralSim;
     };
-  }, [accentIndices, particlePositions]);
+  }, [accentIndices, particlePositions, registerGlobal]);
 
   useFrame((_, delta) => {
-    pulseRef.current = THREE.MathUtils.lerp(pulseRef.current, 1, 0.012);
+    const cfg = MOOD_CFG[moodRef.current] ?? MOOD_CFG.calm;
+    pulseRef.current = THREE.MathUtils.lerp(pulseRef.current, cfg.pulseTarget, 0.012);
 
     if (!particlesRef.current || !linesGeometryRef.current) return;
 
@@ -156,7 +182,7 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
 
       scratch
         .set(particlePositions[i3], particlePositions[i3 + 1], particlePositions[i3 + 2])
-        .add(particleData.velocity)
+        .addScaledVector(particleData.velocity, cfg.speed)
         .setLength(radius);
 
       particlePositions[i3] = scratch.x;
@@ -193,9 +219,19 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
           const alpha = 1.0 - dist / minDistance;
           const accent = particleData.isAccent || particleDataB.isAccent;
           const pulse = 0.55 + alpha * 0.45 * pulseRef.current;
-          const cr = accent ? accentLineColor.r : CYAN.r + (CYAN_BRIGHT.r - CYAN.r) * alpha;
-          const cg = accent ? accentLineColor.g : CYAN.g + (CYAN_BRIGHT.g - CYAN.g) * alpha;
-          const cb = accent ? accentLineColor.b : CYAN.b + (CYAN_BRIGHT.b - CYAN.b) * alpha;
+          const accentMix = accent ? Math.min(1, 0.55 + cfg.accentBias) : 0;
+          const cr =
+            accentMix > 0
+              ? accentLineColor.r * accentMix + (CYAN.r + (CYAN_BRIGHT.r - CYAN.r) * alpha) * (1 - accentMix)
+              : CYAN.r + (CYAN_BRIGHT.r - CYAN.r) * alpha;
+          const cg =
+            accentMix > 0
+              ? accentLineColor.g * accentMix + (CYAN.g + (CYAN_BRIGHT.g - CYAN.g) * alpha) * (1 - accentMix)
+              : CYAN.g + (CYAN_BRIGHT.g - CYAN.g) * alpha;
+          const cb =
+            accentMix > 0
+              ? accentLineColor.b * accentMix + (CYAN.b + (CYAN_BRIGHT.b - CYAN.b) * alpha) * (1 - accentMix)
+              : CYAN.b + (CYAN_BRIGHT.b - CYAN.b) * alpha;
 
           linePositions[vertexpos++] = particlePositions[i3];
           linePositions[vertexpos++] = particlePositions[i3 + 1];
@@ -223,10 +259,17 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
 
     if (groupRef.current) {
       const idleSec = (Date.now() - lastMoveRef.current) / 1000;
-      const rotSpeed = idleSec > 1.5 ? 0.045 : 0.018;
+      const rotSpeed = (idleSec > 1.5 ? cfg.rot * 1.6 : cfg.rot) * (interactive ? 1 : 0.85);
       groupRef.current.rotation.y += delta * rotSpeed;
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        Math.sin(Date.now() * 0.00025) * 0.08,
+        0.02,
+      );
     }
   });
+
+  const cfg = MOOD_CFG[mood] ?? MOOD_CFG.calm;
 
   return (
     <group ref={groupRef}>
@@ -240,12 +283,12 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
         </bufferGeometry>
         <pointsMaterial
           color={CYAN_BRIGHT}
-          size={contained ? 0.055 : 0.07}
+          size={contained ? 0.055 : 0.065}
           blending={THREE.AdditiveBlending}
           transparent
           sizeAttenuation
           depthWrite={false}
-          opacity={0.88}
+          opacity={cfg.opacity}
         />
       </points>
 
@@ -266,14 +309,14 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
           vertexColors
           blending={THREE.AdditiveBlending}
           transparent
-          opacity={0.82}
+          opacity={cfg.opacity * 0.95}
           depthWrite={false}
         />
       </lineSegments>
 
       <ambientLight intensity={0.12} />
-      <pointLight position={[3, 2, 5]} intensity={0.25} color="#88EEFF" distance={12} />
-      <pointLight position={[-2, -1, 4]} intensity={0.08} color="#FF6B35" distance={10} />
+      <pointLight position={[3, 2, 5]} intensity={0.28} color="#88EEFF" distance={14} />
+      <pointLight position={[-2, -1, 4]} intensity={0.1} color="#FF6B35" distance={12} />
     </group>
   );
 }
@@ -281,44 +324,66 @@ function SphericalNeuralNetworkScene({ contained }: { contained: boolean }) {
 interface NeuralUniverseProps {
   className?: string;
   contained?: boolean;
+  interactive?: boolean;
+  mood?: NeuralMood;
+  enableZoom?: boolean;
+  /** Register window.__awakeNeuralSim — only one instance should be true */
+  registerGlobal?: boolean;
 }
 
-export default function NeuralUniverse({ className, contained = false }: NeuralUniverseProps) {
+export default function NeuralUniverse({
+  className,
+  contained = false,
+  interactive = true,
+  mood = 'calm',
+  enableZoom,
+  registerGlobal = true,
+}: NeuralUniverseProps) {
+  const zoom = enableZoom ?? contained;
+
   const handleInteraction = () => {
+    if (!registerGlobal) return;
     const sim = (
       window as Window & { __awakeNeuralSim?: { triggerCalmingWave?: (s: number) => void } }
     ).__awakeNeuralSim;
-    if (sim?.triggerCalmingWave) sim.triggerCalmingWave(0.6);
+    if (sim?.triggerCalmingWave) sim.triggerCalmingWave(0.55);
   };
 
-  const camPos = contained ? [0, 0.2, 8.0] : [0, 1.2, 14];
-  const camFov = contained ? 46 : 42;
+  const camPos = contained ? [0, 0.2, 8.0] : [0, 0.6, 12.5];
+  const camFov = contained ? 46 : 40;
 
   return (
     <div
       className={`relative w-full h-full ${className ?? ''}`}
-      onClick={handleInteraction}
-      onTouchStart={handleInteraction}
+      onClick={interactive ? handleInteraction : undefined}
+      onTouchStart={interactive ? handleInteraction : undefined}
     >
       <Canvas
         camera={{ position: camPos as [number, number, number], fov: camFov }}
         style={{ background: 'transparent' }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 1.85]}
+        dpr={contained ? [1, 1.85] : [1, 1.5]}
       >
-        <SphericalNeuralNetworkScene contained={contained} />
-        <OrbitControls
-          enablePan={false}
-          enableZoom
-          enableRotate
-          enableDamping
-          dampingFactor={0.1}
-          minDistance={contained ? 3.0 : 4}
-          maxDistance={contained ? 95 : 58}
-          rotateSpeed={contained ? 0.3 : 0.28}
-          zoomSpeed={contained ? 0.38 : 0.45}
-          target={[0, 0, 0]}
+        <SphericalNeuralNetworkScene
+          contained={contained}
+          interactive={interactive}
+          mood={mood}
+          registerGlobal={registerGlobal}
         />
+        {interactive && (
+          <OrbitControls
+            enablePan={false}
+            enableZoom={zoom}
+            enableRotate
+            enableDamping
+            dampingFactor={0.1}
+            minDistance={contained ? 3.0 : 6}
+            maxDistance={contained ? 95 : 22}
+            rotateSpeed={contained ? 0.3 : 0.22}
+            zoomSpeed={contained ? 0.38 : 0.35}
+            target={[0, 0, 0]}
+          />
+        )}
       </Canvas>
     </div>
   );
