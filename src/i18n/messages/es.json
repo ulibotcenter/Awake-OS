@@ -152,5 +152,20 @@
     "return": "← Volver a Awake OS",
     "title": "Privacidad y Legal",
     "updated": "Última actualización"
+  },
+  "cookies": {
+    "title": "Cookies",
+    "body": "Usamos analytics ligeros para mejorar Awake OS. Tu elección se guarda en este dispositivo.",
+    "acceptAll": "Aceptar todas las cookies",
+    "acceptNecessary": "Aceptar solo cookies necesarias",
+    "configure": "Configurar",
+    "configureTitle": "Preferencias de cookies",
+    "configureIntro": "Tú controlas lo que se ejecuta en este dispositivo. Solo dos categorías — nada se vende, nada se comparte para anuncios.",
+    "necessaryLabel": "Necesarias",
+    "necessaryDesc": "Imprescindibles para funciones básicas del sitio (idioma, memoria de consentimiento, seguridad).",
+    "analyticsLabel": "Analytics",
+    "analyticsDesc": "Uso anónimo vía Google Analytics para entender qué mejora la experiencia de lanzamiento.",
+    "refuse": "Rechazar todas las cookies",
+    "close": "Cerrar"
   }
 }

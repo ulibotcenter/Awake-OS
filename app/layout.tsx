@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import ConsentGoogleAnalytics from "@/components/ConsentGoogleAnalytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -131,7 +132,10 @@ export default function RootLayout({
           sizes="180x180"
         />
       </head>
-      <body className="min-h-full text-[#FFFFFF]">{children}</body>
+      <body className="min-h-full text-[#FFFFFF]">
+        {children}
+        <ConsentGoogleAnalytics />
+      </body>
     </html>
   );
 }
