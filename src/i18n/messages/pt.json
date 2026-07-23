@@ -152,5 +152,12 @@
     "return": "← Voltar ao Awake OS",
     "title": "Privacidade e Legal",
     "updated": "Última atualização"
+  },
+  "cookies": {
+    "title": "Cookies",
+    "body": "Usamos analytics leves para melhorar o Awake OS. Sua escolha fica salva neste dispositivo.",
+    "acceptAll": "Aceitar todos os cookies",
+    "acceptNecessary": "Aceitar apenas cookies necessários",
+    "refuse": "Recusar todos"
   }
 }
