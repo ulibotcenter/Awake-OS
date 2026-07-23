@@ -18,7 +18,7 @@ const jetbrains = JetBrains_Mono({
 const SITE_URL = "https://awake-os.com";
 
 /** Cache-bust: bump when the brand mark changes */
-const FAVICON_V = "2";
+const FAVICON_V = "3";
 
 const siteDescription =
   "Awake OS is the operating manual for your mind — a practical protocol to reboot your nervous system, end the hidden stress loop, and reclaim calm, clarity, and authentic presence. By Ariel Uri · Somatic Labs Publishing.";
