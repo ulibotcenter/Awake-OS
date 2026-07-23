@@ -724,14 +724,43 @@ h4, h5 {
   border-color: rgba(255, 107, 53, 0.65);
 }
 
-.cookie-btn-refuse {
+.cookie-btn-configure {
   border: 0;
   background: transparent;
-  padding: 0.35rem 0.45rem;
-  font-size: 0.62rem;
+  padding: 0.45rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.04em;
-  color: rgba(184, 245, 255, 0.38);
+  color: rgba(184, 245, 255, 0.55);
   cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(64, 240, 216, 0.25);
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.cookie-btn-configure:hover {
+  color: #E0F7FF;
+  text-decoration-color: rgba(64, 240, 216, 0.55);
+}
+
+.cookie-btn-block {
+  width: 100%;
+  text-align: center;
+}
+
+.cookie-btn-refuse {
+  display: block;
+  width: 100%;
+  margin-top: 0.85rem;
+  border: 0;
+  background: transparent;
+  padding: 0.35rem 0.25rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: rgba(184, 245, 255, 0.28);
+  cursor: pointer;
+  text-align: center;
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: transparent;
@@ -739,8 +768,155 @@ h4, h5 {
 }
 
 .cookie-btn-refuse:hover {
-  color: rgba(184, 245, 255, 0.62);
-  text-decoration-color: rgba(184, 245, 255, 0.35);
+  color: rgba(184, 245, 255, 0.5);
+  text-decoration-color: rgba(184, 245, 255, 0.28);
+}
+
+/* Configure panel */
+.cookie-config {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 640px) {
+  .cookie-config {
+    align-items: center;
+  }
+}
+
+.cookie-config-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(5, 14, 22, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cookie-config-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26rem);
+  padding: 1.15rem 1.2rem 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(64, 240, 216, 0.28);
+  background: rgba(11, 31, 46, 0.97);
+  box-shadow:
+    0 0 40px rgba(64, 240, 216, 0.14),
+    0 20px 48px rgba(0, 0, 0, 0.45);
+  animation: cookie-config-in 260ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes cookie-config-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cookie-config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.cookie-config-title {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #40F0D8;
+}
+
+.cookie-config-close {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(64, 240, 216, 0.28);
+  background: rgba(8, 24, 36, 0.8);
+  color: #E0F7FF;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.cookie-config-close:hover {
+  background: rgba(64, 240, 216, 0.12);
+  border-color: rgba(64, 240, 216, 0.45);
+}
+
+.cookie-config-intro {
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #B8F5FF;
+}
+
+.cookie-config-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.cookie-config-list li {
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(64, 240, 216, 0.14);
+  background: rgba(8, 24, 36, 0.55);
+}
+
+.cookie-config-list p {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: rgba(224, 247, 255, 0.82);
+}
+
+.cookie-config-chip {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.cookie-config-chip-cyan {
+  color: #40F0D8;
+  border: 1px solid rgba(64, 240, 216, 0.35);
+  background: rgba(64, 240, 216, 0.08);
+}
+
+.cookie-config-chip-orange {
+  color: #FF6B35;
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  background: rgba(255, 107, 53, 0.08);
+}
+
+.cookie-config-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
 @media (max-width: 640px) {
@@ -760,10 +936,15 @@ h4, h5 {
     text-align: center;
   }
 
-  .cookie-btn-refuse {
+  .cookie-btn-configure {
     width: 100%;
     text-align: center;
-    margin-top: 0.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-config-panel {
+    animation: none;
   }
 }
 
