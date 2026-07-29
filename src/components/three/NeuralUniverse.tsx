@@ -29,6 +29,9 @@ const MOOD_CFG: Record<
   install: { speed: 1.2, pulseTarget: 1.28, opacity: 0.95, rot: 0.04, accentBias: 0.4 },
 };
 
+/** Particle drift + network rotation scale (~55% slower again vs prior 0.42 → ~0.19). */
+const MOTION_SCALE = 0.19;
+
 function SphericalNeuralNetworkScene({
   contained,
   interactive,
@@ -182,7 +185,7 @@ function SphericalNeuralNetworkScene({
 
       scratch
         .set(particlePositions[i3], particlePositions[i3 + 1], particlePositions[i3 + 2])
-        .addScaledVector(particleData.velocity, cfg.speed)
+        .addScaledVector(particleData.velocity, cfg.speed * MOTION_SCALE)
         .setLength(radius);
 
       particlePositions[i3] = scratch.x;
@@ -259,11 +262,12 @@ function SphericalNeuralNetworkScene({
 
     if (groupRef.current) {
       const idleSec = (Date.now() - lastMoveRef.current) / 1000;
-      const rotSpeed = (idleSec > 1.5 ? cfg.rot * 1.6 : cfg.rot) * (interactive ? 1 : 0.85);
+      const rotSpeed =
+        (idleSec > 1.5 ? cfg.rot * 1.6 : cfg.rot) * (interactive ? 1 : 0.85) * MOTION_SCALE;
       groupRef.current.rotation.y += delta * rotSpeed;
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
-        Math.sin(Date.now() * 0.00025) * 0.08,
+        Math.sin(Date.now() * 0.00025 * MOTION_SCALE) * 0.08,
         0.02,
       );
     }

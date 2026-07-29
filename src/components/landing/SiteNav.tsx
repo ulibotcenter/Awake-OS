@@ -61,9 +61,21 @@ export default function SiteNav({ dict, locale, onCta, onScrollTo }: SiteNavProp
           >
             {dict.architect}
           </button>
+          <a
+            href="https://teia.awake-os.com"
+            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium"
+          >
+            {dict.practice}
+          </a>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href="https://teia.awake-os.com"
+            className="lg:hidden nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium"
+          >
+            {dict.practice}
+          </a>
           <div
             className="lang-switcher flex items-center gap-0.5 rounded-full border border-[rgba(64,240,216,0.22)] bg-[rgba(8,24,36,0.55)] p-0.5"
             role="navigation"
