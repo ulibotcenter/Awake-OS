@@ -9,8 +9,9 @@
     "modules": "Los Módulos",
     "architect": "El Arquitecto",
     "practice": "Practicar",
-    "cta": "Unirse a la Lista de Pre-Lanzamiento",
-    "ctaShort": "Pre-Lanzamiento"
+    "reset60s": "Reset 60s",
+    "cta": "Entrar en la lista",
+    "ctaShort": "Lista"
   },
   "boot": {
     "status": "AWAKE OS // INICIALIZANDO",
@@ -22,7 +23,7 @@
     "author": "ARIEL URI",
     "title": "Awake OS",
     "subtitle": "El Manual de Operación de Tu Mente",
-    "tagline": "Actualiza tu Mente. Reinicia el Hardware.",
+    "tagline": "Actualiza tu mente. Reinicia el hardware.",
     "lead": "No fuiste diseñado para este mundo — pero puedes",
     "leadHighlight": "actualizarte",
     "bodyBefore": "Termina el",
@@ -31,9 +32,9 @@
     "bodyHighlight2": "calma, claridad y presencia auténtica",
     "bodyAfter": "— sin meditación interminable.",
     "badge": "EL RESET DEL HARDWARE",
-    "cta": "Unirse a la Lista de Pre-Lanzamiento",
-    "ctaMobile": "Pre-Lanzamiento",
-    "trust": "Acceso al lanzamiento · Sin spam · Solo resultados",
+    "cta": "Entrar en la lista",
+    "ctaMobile": "Lista",
+    "trust": "Reset ahora · Enlace el 06/10 · Sin spam",
     "scroll": "DESPLÁZATE PARA INICIAR",
     "coverAria": "Ver portada de Awake OS ampliada",
     "coverAlt": "Awake OS — portada frontal"
@@ -44,6 +45,7 @@
     "architecture": "ARQUITECTURA",
     "modules": "MÓDULOS",
     "architect": "ARQUITECTO",
+    "reset": "RESET",
     "install": "INSTALAR"
   },
   "book": {
@@ -62,14 +64,14 @@
     "neuralCaption": "Arrastra para girar · Toca para calmar"
   },
   "overload": {
-    "title": "Tu Sistema Está Sobrecargado.",
+    "title": "Tu sistema está sobrecargado.",
     "body": "La vida moderna ejecuta scripts corruptos en tu mente. Pestañas infinitas, fatiga de decisión y estrés crónico consumen tu ancho de banda. Es hora de un reinicio."
   },
   "architecture": {
     "label": "LA FUNDACIÓN",
     "title": "La Arquitectura",
     "softwareLabel": "CAPA DE SOFTWARE",
-    "softwareTitle": "Mente = SO",
+    "softwareTitle": "Mente = SO (sistema operativo)",
     "softwareP1": "Tu mente ejecuta software obsoleto. Notificaciones constantes y feeds infinitos consumen tus recursos cognitivos.",
     "softwareP2": "Awake OS te enseña a auditar tus algoritmos internos, recuperar ancho de banda mental e instalar protocolos más limpios de foco y presencia.",
     "hardwareLabel": "CAPA FÍSICA",
@@ -92,7 +94,7 @@
     "m03Body": "Identificar qué procesos en segundo plano consumen tu atención y cómo terminarles con precisión.",
     "more": "+ 9 PROTOCOLOS MÁS EN EL SISTEMA COMPLETO",
     "locked": "BLOQUEADO",
-    "lockedHint": "Cifrado hasta el lanzamiento — únete a la lista para desbloquear primero"
+    "lockedHint": "El sistema completo en el lanzamiento — únete a la lista para el enlace del manual."
   },
   "architect": {
     "label": "EL CREADOR",
@@ -102,41 +104,61 @@
     "logoAria": "Ver logo de Somatic Labs Publishing ampliado",
     "logoAlt": "Somatic Labs Publishing"
   },
+  "reset60": {
+    "eyebrow": "PROTOCOLO DE EMERGENCIA",
+    "title": "Prueba el hardware en 60 segundos",
+    "subtitle": "Tres protocolos de Awake OS para usar ahora. El 6 de octubre recibirás el enlace del manual completo.",
+    "item1Title": "Reinicio del Sistema",
+    "item1Body": "Visión panorámica + suspiro fisiológico — Ctrl+Alt+Supr del estrés.",
+    "item2Title": "Ancla / Reset del Pecho",
+    "item2Body": "Cuando el pensamiento falla, el cuerpo da el override.",
+    "item3Title": "Regla de Un Paso",
+    "item3Body": "Sube solo un estado a la vez. Sin salto mágico.",
+    "cta": "Quiero el Reset + lugar en la lista",
+    "closing": "A veces no necesitas meditar una hora entera. Necesitas un Ctrl+Alt+Supr.",
+    "footnote": "Prácticas educativas/complementarias — no son tratamiento médico ni psicológico y no sustituyen el cuidado profesional. En crisis: emergencia local / CVV 188 (BR).",
+    "disclaimerLink": "Aviso completo"
+  },
   "finalCta": {
-    "eyebrow": "SECUENCIA DE INSTALACIÓN",
-    "status": "SISTEMA LISTO",
+    "eyebrow": "PRÓXIMO PASO",
+    "status": "LISTA ABIERTA",
     "title": "¿Listo para reiniciar?",
-    "subtitle": "Instala Awake OS",
-    "body": "El acceso de pre-lanzamiento está abierto. Sé el primero cuando el manual de la mente se publique.",
-    "launchNote": "Lanzamiento · 18 de agosto de 2026 · 10:00 CEST",
-    "button": "Unirse a la Lista de Pre-Lanzamiento",
-    "trust": "Sin spam. Sin meditación interminable. Solo resultados.",
-    "perk1": "Primer acceso al lanzamiento",
-    "perk2": "Señal de precio de lanzamiento",
-    "perk3": "Protocolo cero spam",
-    "countdownLabel": "LA SEÑAL ABRE EN",
+    "subtitle": "Únete a la lista Awake OS",
+    "body": "Lleva el Reset de 60s ahora. El 6 de octubre recibirás el enlace del manual completo.",
+    "launchNote": "Lanzamiento · 6 de octubre de 2026 · 10:00 CEST",
+    "button": "Quiero el Reset + entrar en la lista",
+    "trust": "Sin spam. Sin meditación interminable. Solo el siguiente paso.",
+    "perk1": "Reset de 60s al instante",
+    "perk2": "Enlace del manual el 06/10",
+    "perk3": "Cero spam",
+    "countdownLabel": "LANZAMIENTO EN",
     "days": "Días",
     "hours": "Horas",
     "minutes": "Min",
     "seconds": "Seg",
     "countdownLive": "Sistema en vivo",
-    "closing": "La mente que aplazas espera una instalación limpia. Esta es la ventana abierta."
+    "closing": "Tres protocolos ahora. El manual completo el día del lanzamiento."
   },
   "footer": {
     "copy": "Copyright © 2026 Ariel Uri / Somatic Labs Publishing. Todos los derechos reservados.",
-    "privacy": "Privacidad y Legal"
+    "privacy": "Privacidad y Legal",
+    "disclaimer": "Aviso médico"
   },
   "modal": {
-    "title": "Lista de Pre-Lanzamiento",
-    "subtitle": "Asegura tu lugar antes de que Awake OS se publique. Solo señal de lanzamiento — sin spam.",
+    "kicker": "LISTA",
+    "title": "Lista Awake OS",
+    "subtitle": "Únete a la lista: llévate el Reset de 60s ahora. El 6 de octubre, el enlace del manual completo — sin spam.",
     "name": "Nombre completo",
     "namePlaceholder": "Tu nombre",
     "email": "Email",
     "emailPlaceholder": "tu@email.com",
-    "submit": "Asegurar mi lugar",
+    "submit": "Quiero el Reset",
     "loading": "Registrando…",
     "success": "Estás en la lista.",
-    "successSub": "Señal de lanzamiento en camino. Tu actualización empieza en el momento en que salgamos al aire.",
+    "successSub": "Descarga el Reset abajo. El 6 de octubre recibirás el enlace del manual completo.",
+    "downloadReset": "Descargar Reset 60s (PDF)",
+    "acceptDisclaimer": "Entiendo: prácticas educativas — no sustituyen atención médica/psicológica. Crisis: emergencia local / CVV 188 (BR).",
+    "disclaimerLink": "Aviso completo",
     "continue": "Seguir explorando",
     "error": "Algo salió mal. Revisa los datos e inténtalo de nuevo.",
     "close": "Cerrar"
@@ -146,7 +168,7 @@
     "spread": "Portada completa — frente y contraportada",
     "logo": "Somatic Labs Publishing",
     "close": "Cerrar vista ampliada",
-    "hint": "Rueda o pellizca para zoom · Arrastra para mover · Doble clic para resetear · Escape para cerrar"
+    "hint": "Rueda o pellizca para zoom · Arrastra para mover · Clic fuera o Escape para cerrar"
   },
   "privacy": {
     "back": "← Volver al inicio",

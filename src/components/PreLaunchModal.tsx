@@ -3,19 +3,30 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import type { Dictionary } from '@/i18n/get-dictionary';
+import { defaultLocale, getLocaleFromPathname, type Locale } from '@/i18n/config';
 import { triggerNeuralWave } from '@/lib/neural-api';
+
+function resetPdfHref(locale: Locale) {
+  return `/awake-os-reset-60s-${locale}.pdf`;
+}
 
 interface PreLaunchModalProps {
   isOpen: boolean;
   onClose: () => void;
   dict: Dictionary['modal'];
+  locale?: Locale;
 }
 
-export default function PreLaunchModal({ isOpen, onClose, dict }: PreLaunchModalProps) {
+export default function PreLaunchModal({ isOpen, onClose, dict, locale }: PreLaunchModalProps) {
+  const pathname = usePathname() || '';
+  const resolvedLocale: Locale = locale ?? getLocaleFromPathname(pathname) ?? defaultLocale;
+  const pdfHref = resetPdfHref(resolvedLocale);
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [acceptDisclaimer, setAcceptDisclaimer] = useState(false);
 
   useEffect(() => {
     if (isOpen) triggerNeuralWave(0.9);
@@ -54,6 +65,7 @@ export default function PreLaunchModal({ isOpen, onClose, dict }: PreLaunchModal
       setFormData({ name: '', email: '' });
       setStatus('idle');
       setMessage('');
+      setAcceptDisclaimer(false);
     }, 400);
   };
 
@@ -99,6 +111,38 @@ export default function PreLaunchModal({ isOpen, onClose, dict }: PreLaunchModal
                 <div className="beta-modal-success-icon prelaunch-success-ring">✓</div>
                 <h3 className="beta-modal-title">{dict.success}</h3>
                 <p className="beta-modal-success-text">{dict.successSub}</p>
+                <div className="flex items-start gap-2 text-left max-w-[22rem] mx-auto mb-4">
+                  <input
+                    id="reset-disclaimer"
+                    type="checkbox"
+                    checked={acceptDisclaimer}
+                    onChange={(e) => setAcceptDisclaimer(e.target.checked)}
+                    className="mt-1 shrink-0 accent-[#40F0D8]"
+                  />
+                  <p className="text-[11px] leading-relaxed text-[#B8F5FF]">
+                    <label htmlFor="reset-disclaimer">{dict.acceptDisclaimer}</label>{' '}
+                    <a
+                      href={`/${resolvedLocale}/privacy#disclaimer`}
+                      className="text-[#40F0D8] underline underline-offset-2"
+                    >
+                      {dict.disclaimerLink}
+                    </a>
+                  </p>
+                </div>
+                <a
+                  href={acceptDisclaimer ? pdfHref : undefined}
+                  download={acceptDisclaimer ? `awake-os-reset-60s-${resolvedLocale}.pdf` : undefined}
+                  target={acceptDisclaimer ? '_blank' : undefined}
+                  rel={acceptDisclaimer ? 'noopener' : undefined}
+                  aria-disabled={!acceptDisclaimer}
+                  tabIndex={acceptDisclaimer ? 0 : -1}
+                  className={`beta-modal-access-link${acceptDisclaimer ? '' : ' pointer-events-none opacity-40'}`}
+                  onClick={(e) => {
+                    if (!acceptDisclaimer) e.preventDefault();
+                  }}
+                >
+                  {dict.downloadReset}
+                </a>
                 <button
                   type="button"
                   onClick={handleClose}
@@ -110,7 +154,7 @@ export default function PreLaunchModal({ isOpen, onClose, dict }: PreLaunchModal
             ) : (
               <>
                 <p className="label text-[10px] tracking-[0.28em] text-[#40F0D8] text-center mb-2">
-                  PRE-LAUNCH
+                  {dict.kicker}
                 </p>
                 <h3 className="beta-modal-title">{dict.title}</h3>
                 <p className="beta-modal-subtitle">{dict.subtitle}</p>

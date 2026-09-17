@@ -13,6 +13,38 @@ interface SiteNavProps {
   onScrollTo: (id: string) => void;
 }
 
+const RESET_NOW: Record<Locale, string> = {
+  en: 'now',
+  pt: 'agora',
+  es: 'ahora',
+};
+
+const NAV_LINK_CLASS =
+  'nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer bg-transparent border-0';
+
+function Reset60sNavButton({
+  label,
+  nowLabel,
+  className,
+  onClick,
+}: {
+  label: string;
+  nowLabel: string;
+  className?: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`nav-link nav-link-reset60s inline-flex items-center gap-1.5 text-[13px] tracking-[0.5px] font-semibold cursor-pointer bg-transparent border-0 text-[#40F0D8]${className ? ` ${className}` : ''}`}
+    >
+      {label}
+      <span className="nav-reset60s-chip">{nowLabel}</span>
+    </button>
+  );
+}
+
 export default function SiteNav({ dict, locale, onCta, onScrollTo }: SiteNavProps) {
   const pathname = usePathname() || `/${locale}`;
 
@@ -36,46 +68,45 @@ export default function SiteNav({ dict, locale, onCta, onScrollTo }: SiteNavProp
           <button
             type="button"
             onClick={() => onScrollTo('the-overload')}
-            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer bg-transparent border-0"
+            className={NAV_LINK_CLASS}
           >
             {dict.premise}
           </button>
           <button
             type="button"
             onClick={() => onScrollTo('the-architecture')}
-            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer bg-transparent border-0"
+            className={NAV_LINK_CLASS}
           >
             {dict.architecture}
           </button>
           <button
             type="button"
             onClick={() => onScrollTo('the-modules')}
-            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer bg-transparent border-0"
+            className={NAV_LINK_CLASS}
           >
             {dict.modules}
           </button>
           <button
             type="button"
             onClick={() => onScrollTo('the-architect')}
-            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium cursor-pointer bg-transparent border-0"
+            className={NAV_LINK_CLASS}
           >
             {dict.architect}
           </button>
-          <a
-            href="https://teia.awake-os.com"
-            className="nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium"
-          >
-            {dict.practice}
-          </a>
+          <Reset60sNavButton
+            label={dict.reset60s}
+            nowLabel={RESET_NOW[locale]}
+            onClick={() => onScrollTo('reset-60s')}
+          />
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href="https://teia.awake-os.com"
-            className="lg:hidden nav-link text-[#E0F7FF] text-[13px] tracking-[0.5px] font-medium"
-          >
-            {dict.practice}
-          </a>
+          <Reset60sNavButton
+            label={dict.reset60s}
+            nowLabel={RESET_NOW[locale]}
+            className="lg:hidden"
+            onClick={() => onScrollTo('reset-60s')}
+          />
           <div
             className="lang-switcher flex items-center gap-0.5 rounded-full border border-[rgba(64,240,216,0.22)] bg-[rgba(8,24,36,0.55)] p-0.5"
             role="navigation"

@@ -9,8 +9,9 @@
     "modules": "Os Módulos",
     "architect": "O Arquiteto",
     "practice": "Praticar",
-    "cta": "Entrar na Lista de Pré-Lançamento",
-    "ctaShort": "Pré-Lançamento"
+    "reset60s": "Reset 60s",
+    "cta": "Entrar na lista",
+    "ctaShort": "Lista"
   },
   "boot": {
     "status": "AWAKE OS // INICIALIZANDO",
@@ -22,7 +23,7 @@
     "author": "ARIEL URI",
     "title": "Awake OS",
     "subtitle": "O Manual de Operação da Sua Mente",
-    "tagline": "Faça o upgrade da Mente. Reinicie o Hardware.",
+    "tagline": "Faça o upgrade da mente. Reinicie o hardware.",
     "lead": "Você não foi feito para este mundo — mas pode fazer o",
     "leadHighlight": "upgrade",
     "bodyBefore": "Encerre o",
@@ -31,9 +32,9 @@
     "bodyHighlight2": "calma, clareza e presença autêntica",
     "bodyAfter": "— sem meditação sem fim.",
     "badge": "O RESET DO HARDWARE",
-    "cta": "Entrar na Lista de Pré-Lançamento",
-    "ctaMobile": "Pré-Lançamento",
-    "trust": "Acesso no lançamento · Sem spam · Só resultados",
+    "cta": "Entrar na lista",
+    "ctaMobile": "Lista",
+    "trust": "Reset agora · Link no 06/10 · Sem spam",
     "scroll": "ROLE PARA INICIAR",
     "coverAria": "Ver capa de Awake OS ampliada",
     "coverAlt": "Awake OS — capa frontal"
@@ -44,6 +45,7 @@
     "architecture": "ARQUITETURA",
     "modules": "MÓDULOS",
     "architect": "ARQUITETO",
+    "reset": "RESET",
     "install": "INSTALAR"
   },
   "book": {
@@ -62,14 +64,14 @@
     "neuralCaption": "Arraste para girar · Toque para acalmar"
   },
   "overload": {
-    "title": "Seu Sistema Está Sobrecarregado.",
+    "title": "Seu sistema está sobrecarregado.",
     "body": "A vida moderna roda scripts corrompidos na sua mente. Abas infinitas, fadiga de decisão e estresse crônico consomem sua largura de banda. É hora de um reboot."
   },
   "architecture": {
     "label": "A FUNDAÇÃO",
     "title": "A Arquitetura",
     "softwareLabel": "CAMADA DE SOFTWARE",
-    "softwareTitle": "Mente = SO",
+    "softwareTitle": "Mente = SO (sistema operacional)",
     "softwareP1": "Sua mente roda software desatualizado. Notificações constantes e feeds infinitos consomem seus recursos cognitivos.",
     "softwareP2": "Awake OS ensina a auditar seus algoritmos internos, recuperar largura de banda mental e instalar protocolos mais limpos de foco e presença.",
     "hardwareLabel": "CAMADA FÍSICA",
@@ -92,51 +94,71 @@
     "m03Body": "Identificar quais processos em segundo plano consomem sua atenção e como encerrá-los com precisão.",
     "more": "+ 9 PROTOCOLOS NO SISTEMA COMPLETO",
     "locked": "BLOQUEADO",
-    "lockedHint": "Criptografado até o lançamento — entre na lista para desbloquear primeiro"
+    "lockedHint": "O sistema completo no lançamento — entre na lista para o link do manual."
   },
   "architect": {
     "label": "O CRIADOR",
     "title": "Ariel Uri",
-    "lead": "Ariel Uri engenhou o protocolo Awake OS não como místico, mas como arquiteto de sistemas da condição humana.",
+    "lead": "Ariel Uri concebeu o protocolo Awake OS não como místico, mas como arquiteto de sistemas da condição humana.",
     "body": "Após anos no cruzamento entre neurociência, pensamento sistêmico e prática contemplativa, construiu um framework prático para o upgrade do sistema operacional humano.",
     "logoAria": "Ver logo da Somatic Labs Publishing ampliada",
     "logoAlt": "Somatic Labs Publishing"
   },
+  "reset60": {
+    "eyebrow": "PROTOCOLO DE EMERGÊNCIA",
+    "title": "Teste o hardware em 60 segundos",
+    "subtitle": "Três protocolos do Awake OS para usar agora. No dia 6 de outubro, você recebe o link do manual completo.",
+    "item1Title": "Reinicialização do Sistema",
+    "item1Body": "Visão panorâmica + suspiro fisiológico — Ctrl+Alt+Del do estresse.",
+    "item2Title": "Âncora / Reset do Peito",
+    "item2Body": "Quando o pensamento falha, o corpo dá o override.",
+    "item3Title": "Regra do Um Passo",
+    "item3Body": "Suba só um estado por vez. Sem salto mágico.",
+    "cta": "Quero o Reset + lugar na lista",
+    "closing": "Às vezes você não precisa meditar uma hora inteira. Precisa de um Ctrl+Alt+Del.",
+    "footnote": "Práticas educacionais/complementares — não são tratamento médico nem psicológico e não substituem cuidado profissional. Em crise no Brasil: CVV 188 · cvv.org.br",
+    "disclaimerLink": "Aviso completo"
+  },
   "finalCta": {
-    "eyebrow": "SEQUÊNCIA DE INSTALAÇÃO",
-    "status": "SISTEMA PRONTO",
+    "eyebrow": "PRÓXIMO PASSO",
+    "status": "LISTA ABERTA",
     "title": "Pronto para o reboot?",
-    "subtitle": "Instale o Awake OS",
-    "body": "O acesso de pré-lançamento está aberto. Seja o primeiro quando o manual da mente for ao ar.",
-    "launchNote": "Lançamento · 18 de agosto de 2026 · 10:00 CEST",
-    "button": "Entrar na Lista de Pré-Lançamento",
-    "trust": "Sem spam. Sem meditação sem fim. Só resultados.",
-    "perk1": "Primeiro acesso no lançamento",
-    "perk2": "Sinal de preço de lançamento",
-    "perk3": "Protocolo zero spam",
-    "countdownLabel": "O SINAL ABRE EM",
+    "subtitle": "Entre na lista Awake OS",
+    "body": "Leve o Reset de 60s agora. No dia 6 de outubro, você recebe o link do manual completo.",
+    "launchNote": "Lançamento · 6 de outubro de 2026 · 10:00 CEST",
+    "button": "Quero o Reset + entrar na lista",
+    "trust": "Sem spam. Sem meditação sem fim. Só o próximo passo.",
+    "perk1": "Reset de 60s na hora",
+    "perk2": "Link do manual no 06/10",
+    "perk3": "Zero spam",
+    "countdownLabel": "LANÇAMENTO EM",
     "days": "Dias",
     "hours": "Horas",
     "minutes": "Min",
     "seconds": "Seg",
     "countdownLive": "Sistema no ar",
-    "closing": "A mente que você adia espera por uma instalação limpa. Esta é a janela aberta."
+    "closing": "Três protocolos agora. O manual completo no dia."
   },
   "footer": {
     "copy": "Copyright © 2026 Ariel Uri / Somatic Labs Publishing. Todos os direitos reservados.",
-    "privacy": "Privacidade e Legal"
+    "privacy": "Privacidade e Legal",
+    "disclaimer": "Aviso médico"
   },
   "modal": {
-    "title": "Lista de Pré-Lançamento",
-    "subtitle": "Garanta seu lugar antes do Awake OS ir ao ar. Só sinal de lançamento — sem spam.",
+    "kicker": "LISTA",
+    "title": "Lista Awake OS",
+    "subtitle": "Entre na lista: leve o Reset de 60s agora. Em 6 de outubro, o link do manual completo — sem spam.",
     "name": "Nome completo",
     "namePlaceholder": "Seu nome",
     "email": "Email",
     "emailPlaceholder": "seu@email.com",
-    "submit": "Garantir minha vaga",
+    "submit": "Quero o Reset",
     "loading": "Registrando…",
     "success": "Você está na lista.",
-    "successSub": "Sinal de lançamento a caminho. Seu upgrade começa no momento em que formos ao ar.",
+    "successSub": "Baixe o Reset abaixo. No dia 6 de outubro, você recebe o link do manual completo.",
+    "downloadReset": "Baixar Reset 60s (PDF)",
+    "acceptDisclaimer": "Li e entendo: práticas educacionais — não substituem cuidado médico/psicológico. Em crise: CVV 188.",
+    "disclaimerLink": "Aviso completo",
     "continue": "Continuar explorando",
     "error": "Algo deu errado. Verifique os dados e tente de novo.",
     "close": "Fechar"
@@ -146,7 +168,7 @@
     "spread": "Capa completa — frente e verso",
     "logo": "Somatic Labs Publishing",
     "close": "Fechar visualização ampliada",
-    "hint": "Role ou pinça para zoom · Arraste para mover · Clique duplo para resetar · Escape para fechar"
+    "hint": "Role ou pinça para zoom · Arraste para mover · Clique fora ou Escape para fechar"
   },
   "privacy": {
     "back": "← Voltar ao início",

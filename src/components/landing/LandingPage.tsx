@@ -17,6 +17,7 @@ import ScrollProgress from './ScrollProgress';
 import AmbientParticles from './AmbientParticles';
 import CoverLightbox, { type LightboxKey } from './CoverLightbox';
 import FinalCta from './FinalCta';
+import Reset60Section from './Reset60Section';
 import Reveal from './Reveal';
 import { getCoverAssets } from '@/lib/covers';
 
@@ -46,6 +47,7 @@ const SECTION_MOOD: Record<string, NeuralMood> = {
   'the-architecture': 'stable',
   'the-modules': 'focus',
   'the-architect': 'calm',
+  'reset-60s': 'focus',
   'join-prelaunch': 'install',
 };
 
@@ -178,6 +180,7 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
       'the-architecture',
       'the-modules',
       'the-architect',
+      'reset-60s',
       'join-prelaunch',
     ];
     const elements = ids
@@ -200,6 +203,7 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
         if (id === 'hero' || id === 'the-book') setHeroMood(mood === 'boot' ? 'calm' : mood);
         if (id === 'the-overload') triggerNeuralWave(0.35);
         if (id === 'the-architecture') triggerNeuralWave(0.85);
+        if (id === 'reset-60s') triggerNeuralWave(0.7);
         if (id === 'join-prelaunch') triggerNeuralWave(1.05);
       },
       { threshold: [0.2, 0.35, 0.5], rootMargin: '-15% 0px -35% 0px' },
@@ -537,6 +541,8 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
         </div>
       </section>
 
+      <Reset60Section dict={dict.reset60} onCta={openModal} locale={locale} />
+
       <FinalCta dict={dict.finalCta} onCta={openModal} />
 
       <footer className="site-footer border-t border-[rgba(0,229,192,0.28)]">
@@ -545,17 +551,25 @@ export default function LandingPage({ locale, dict }: LandingPageProps) {
             <p className="site-footer-copy text-xs sm:text-[0.8rem] text-[#B8F5FF] leading-relaxed max-w-xl">
               {dict.footer.copy}
             </p>
-            <Link
-              href={`/${locale}/privacy`}
-              className="site-footer-link text-xs sm:text-[0.8rem] text-[#40F0D8] hover:text-[#E0F7FF] transition-colors"
-            >
-              {dict.footer.privacy}
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href={`/${locale}/privacy`}
+                className="site-footer-link text-xs sm:text-[0.8rem] text-[#40F0D8] hover:text-[#E0F7FF] transition-colors"
+              >
+                {dict.footer.privacy}
+              </Link>
+              <Link
+                href={`/${locale}/privacy#disclaimer`}
+                className="site-footer-link text-xs sm:text-[0.8rem] text-[#40F0D8] hover:text-[#E0F7FF] transition-colors"
+              >
+                {dict.footer.disclaimer}
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
 
-      <PreLaunchModal isOpen={modalOpen} onClose={closeModal} dict={dict.modal} />
+      <PreLaunchModal isOpen={modalOpen} onClose={closeModal} dict={dict.modal} locale={locale} />
       <CoverLightbox
         active={coverLightbox}
         onClose={() => setCoverLightbox(null)}

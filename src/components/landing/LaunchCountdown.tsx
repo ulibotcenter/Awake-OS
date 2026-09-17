@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-/** August 18, 2026 · 10:00 AM CEST (UTC+2) */
-export const LAUNCH_AT = new Date('2026-08-18T10:00:00+02:00');
+/** October 6, 2026 · 10:00 CEST */
+export const LAUNCH_AT = new Date('2026-10-06T10:00:00+02:00');
 
 export interface CountdownLabels {
   label: string;

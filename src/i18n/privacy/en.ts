@@ -312,11 +312,11 @@ export const privacyEn: PrivacyDoc = {
         },
         {
           type: 'p',
-          text: '**Additional limitations:** The Site, Content, and pre-launch list are provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express, implied, or statutory, including but not limited to warranties of merchantability, fitness for a particular purpose, accuracy, non-infringement, or uninterrupted availability.',
+          text: '**Additional limitations:** The Site, Content, and Awake OS waitlist are provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express, implied, or statutory, including but not limited to warranties of merchantability, fitness for a particular purpose, accuracy, non-infringement, or uninterrupted availability.',
         },
         {
           type: 'p',
-          text: 'To the maximum extent permitted by applicable law, Ariel Uri, Somatic Labs Publishing, and their officers, employees, agents, and affiliates shall not be liable for any direct, indirect, incidental, special, consequential, exemplary, or punitive damages arising from or related to your use of the Site, Content, or pre-launch list — including loss of profits, data, goodwill, or personal injury — even if advised of the possibility of such damages.',
+          text: 'To the maximum extent permitted by applicable law, Ariel Uri, Somatic Labs Publishing, and their officers, employees, agents, and affiliates shall not be liable for any direct, indirect, incidental, special, consequential, exemplary, or punitive damages arising from or related to your use of the Site, Content, or Awake OS waitlist — including loss of profits, data, goodwill, or personal injury — even if advised of the possibility of such damages.',
         },
         {
           type: 'p',

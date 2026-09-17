@@ -312,11 +312,11 @@ export const privacyPt: PrivacyDoc = {
         },
         {
           type: 'p',
-          text: '**Limitações adicionais:** O Site, o Conteúdo e a lista de pré-lançamento são fornecidos "NO ESTADO EM QUE SE ENCONTRAM" e "CONFORME DISPONÍVEL", sem garantias de qualquer tipo, expressas, implícitas ou legais, incluindo, sem limitação, comerciabilidade, adequação a um fim específico, precisão, não violação ou disponibilidade ininterrupta.',
+          text: '**Limitações adicionais:** O Site, o Conteúdo e a lista Awake OS são fornecidos "NO ESTADO EM QUE SE ENCONTRAM" e "CONFORME DISPONÍVEL", sem garantias de qualquer tipo, expressas, implícitas ou legais, incluindo, sem limitação, comerciabilidade, adequação a um fim específico, precisão, não violação ou disponibilidade ininterrupta.',
         },
         {
           type: 'p',
-          text: 'Na máxima extensão permitida pela lei aplicável, Ariel Uri, Somatic Labs Publishing e seus diretores, colaboradores, agentes e afiliados não serão responsáveis por danos diretos, indiretos, incidentais, especiais, consequenciais, exemplares ou punitivos decorrentes do uso do Site, Conteúdo ou lista de pré-lançamento — incluindo perda de lucros, dados, goodwill ou lesão pessoal — mesmo se avisados da possibilidade de tais danos.',
+          text: 'Na máxima extensão permitida pela lei aplicável, Ariel Uri, Somatic Labs Publishing e seus diretores, colaboradores, agentes e afiliados não serão responsáveis por danos diretos, indiretos, incidentais, especiais, consequenciais, exemplares ou punitivos decorrentes do uso do Site, Conteúdo ou lista Awake OS — incluindo perda de lucros, dados, goodwill ou lesão pessoal — mesmo se avisados da possibilidade de tais danos.',
         },
         {
           type: 'p',

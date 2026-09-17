@@ -9,6 +9,7 @@ const STEPS = [
   { id: 'the-architecture', key: 'architecture' as const },
   { id: 'the-modules', key: 'modules' as const },
   { id: 'the-architect', key: 'architect' as const },
+  { id: 'reset-60s', key: 'reset' as const },
   { id: 'join-prelaunch', key: 'install' as const },
 ];
 

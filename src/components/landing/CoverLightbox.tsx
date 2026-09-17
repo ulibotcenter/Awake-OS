@@ -31,6 +31,7 @@ export default function CoverLightbox({ active, onClose, dict, locale }: CoverLi
     tx: 0,
     ty: 0,
   });
+  const tapRef = useRef({ x: 0, y: 0, dragged: false });
   const pinchRef = useRef<{
     dist: number;
     scale: number;
@@ -115,6 +116,7 @@ export default function CoverLightbox({ active, onClose, dict, locale }: CoverLi
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0) return;
+    tapRef.current = { x: e.clientX, y: e.clientY, dragged: false };
     if (scale <= MIN_SCALE) return;
     const el = e.currentTarget as HTMLElement;
     el.setPointerCapture(e.pointerId);
@@ -128,6 +130,9 @@ export default function CoverLightbox({ active, onClose, dict, locale }: CoverLi
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
+    const tapDx = e.clientX - tapRef.current.x;
+    const tapDy = e.clientY - tapRef.current.y;
+    if (Math.hypot(tapDx, tapDy) >= 5) tapRef.current.dragged = true;
     if (!dragRef.current.active) return;
     const dx = e.clientX - dragRef.current.x;
     const dy = e.clientY - dragRef.current.y;
@@ -260,7 +265,16 @@ export default function CoverLightbox({ active, onClose, dict, locale }: CoverLi
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
         onDoubleClick={onDoubleClick}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (tapRef.current.dragged) return;
+          if (e.target !== stageRef.current) return;
+          if (scale <= MIN_SCALE) {
+            onClose();
+            return;
+          }
+          resetView();
+        }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
